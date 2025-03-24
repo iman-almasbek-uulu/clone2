@@ -1,0 +1,41 @@
+.ratingContainer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.ratingCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #004d5f;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #004d5f;
+
+  &.active {
+    background-color: #004d5f;
+    color: white;
+    border-color: #004d5f;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #004d5f;
+    color: white;
+    border-color: #004d5f;
+  }
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}

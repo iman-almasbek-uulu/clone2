@@ -1,0 +1,27 @@
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    .starContainer {
+        width: 9px;
+        height: 9px;
+        background-color: #fff;
+        border: 1px solid #3C5F63;
+        
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        .starFill {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: #3C5F63;
+            // border-radius: 10px;
+        }
+    }
+}

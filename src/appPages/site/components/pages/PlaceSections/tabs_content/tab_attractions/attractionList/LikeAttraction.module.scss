@@ -1,0 +1,24 @@
+.heart {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .heartIcon {
+    font-size: 18px;
+  }
+  .heartIconRed {
+    font-size: 18px;
+    color: red;
+  }
+}
+.warning-toast {
+  background-color: blue !important;
+  color: white !important;
+}

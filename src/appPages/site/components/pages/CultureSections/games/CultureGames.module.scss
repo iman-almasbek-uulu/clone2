@@ -1,0 +1,149 @@
+// Variables
+$color-primary: #0066cc;
+$color-text: #333;
+$color-background: #fff;
+$color-header-bg: rgba(0, 102, 204, 0.1);
+$font-primary: "Montserrat", sans-serif;
+$font-display: "Abril Fatface", cursive;
+
+.container {
+  margin-top: 30px;
+  padding-bottom: 40px;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    padding: 0 10px;
+  }
+  @media (max-width: 428px) {
+    margin-top: 0;
+  }
+}
+
+.banner {
+  position: relative; // Делаем контейнер относительно позиционированным
+  padding: 2rem;
+  background-image: url("../../../../../../assets/images/cultureImages/bg.jpg");
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between; // Распределяем пространство между элементами
+  align-items: center; // Центрируем содержимое по вертикали
+  overflow: hidden; // Скрываем выходящие за пределы элементы (например, размытый фон)
+  gap: 1rem; // Отступ между элементами
+  min-height: 200px; // Минимальная высота для десктопной версии
+  height: clamp(101px, 20vh, 200px); // Плавная адаптация высоты
+
+  &::before {
+    content: ""; // Обязательно для псевдоэлементов
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(195, 185, 185, 0.639); // Полупрозрачный цвет
+    backdrop-filter: blur(10px); // Размытие фона
+    z-index: 1; // Помещаем псевдоэлемент под содержимое
+  }
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    border-radius: 0;
+    padding: 1.5rem; // Отступы внутри баннера
+    text-align: center;
+  }
+
+  @media (max-width: 390px) {
+    height: 101px; // Фиксированная высота для мобильной версии
+    padding: 1rem;
+  }
+
+  &__title {
+    font-family: $font-display;
+    color: #004a60; // Цвет текста
+    font-size: clamp(24px, 5vw, 64px); // Плавное изменение размера
+    line-height: clamp(
+      32.38px,
+      6.5vw,
+      86.34px
+    ); // Плавное изменение высоты строки
+    font-weight: 400;
+    text-align: center;
+    z-index: 2;
+    margin-bottom: 0; // Убираем отступ снизу, так как элементы в строке
+  }
+
+  &__description {
+    max-width: 811px;
+    color: #000000;
+    font-family: Frank Ruhl Libre;
+    font-size: clamp(16px, 2.5vw, 24px);
+    line-height: clamp(22.4px, 3.5vw, 33.6px);
+    font-weight: 500;
+    z-index: 2;
+
+    @media (max-width: 768px) {
+      max-width: 90%;
+    }
+  }
+}
+
+.games {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.game {
+  display: flex;
+  gap: 2rem;
+
+  @media (max-width: 835px) {
+    flex-direction: column;
+  }
+
+  &__imageContainer {
+    flex: 0 0 40%;
+
+    @media (max-width: 768px) {
+      flex: 1;
+    }
+  }
+
+  &__image {
+    width: 574px;
+    height: 392px;
+    border-radius: 8px;
+
+    @media (max-width: 835px) {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 480px) {
+      border-radius: 5.89px;
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    font-family: Montserrat;
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: clamp(26px, 3.3vw, 38px);
+    margin-bottom: 1rem;
+    color: #000000;
+  }
+
+  &__description {
+    max-width: 680px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: clamp(13px, 2vw, 20px);
+    line-height: clamp(22.4px, 2.8vw, 33.6px);
+    @media (max-width: 1034px) {
+      font-size: 17px;
+    }
+  }
+}

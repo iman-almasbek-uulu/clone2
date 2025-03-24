@@ -1,0 +1,198 @@
+.section {
+  padding: 40px;
+  .top {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    padding-inline: 50px;
+    background-image: url("../../../../../../assets/images/cultureImages/bg.jpg");
+    background-position: center;
+    backdrop-filter: blur(10px);
+    @media (max-width: 500px) {
+      position: absolute;
+      width: 100%;
+      height: 151px;
+      top: 80px;
+      left: 0;
+      justify-content: center;
+    }
+    .muted-background {
+      background-color: rgba(195, 185, 185, 0.639);
+      backdrop-filter: blur(10px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+    .top-heading {
+      color: #004a60;
+      font-family: Abril Fatface;
+      font-size: clamp(28px, 5vw, 64px);
+      font-weight: 400;
+      max-width: 150px;
+    }
+    .top-paragraph {
+      color: #000;
+      font-family: Frank Ruhl Libre;
+      font-size: clamp(12px, 5vw, 24px);
+      font-weight: 500;
+      line-height: 30.98px;
+      width: 626px;
+    }
+  }
+  .bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    @media (max-width: 835px) {
+      grid-template-columns: 1fr;
+    }
+    @media (max-width: 500px) {
+      padding-top: 130px;
+    }
+    .images {
+      width: 100%;
+      height: auto;
+      padding: 50px 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 30px;
+      backdrop-filter: blur(15px);
+      background: url("./../../../../../../assets/images/cultureImages/currency_back.jpg")
+        no-repeat center;
+      background-size: cover;
+      .image {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+    }
+    .descrs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      .h1 {
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: clamp(20px, 3vw, 24px);
+        line-height: clamp(24px, 3vw, 29.26px);
+      }
+
+      .description {
+        max-width: 588px;
+        width: 100%;
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
+        font-size: clamp(20px, 3vw, 20px);
+        line-height: clamp(24px, 3.5vw, 24.38px);
+      }
+    }
+  }
+}
+@media (max-width: 1034px) {
+  .top {
+    gap: 90px;
+  }
+}
+@media (max-width: 1023px) {
+  .main {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+@media (max-width: 835px) {
+  .section {
+    .top {
+      .top-paragraph {
+        font-size: 22px;
+        line-height: 26.98px;
+      }
+    }
+  }
+}
+@media (max-width: 814px) {
+  .section {
+    .top {
+      gap: 40px;
+      padding: 0 30px;
+      .top-paragraph {
+        font-size: 18px;
+      }
+    }
+  }
+}
+@media (max-width: 613px) {
+  .section {
+    .top {
+      gap: 20px;
+      .top-paragraph {
+        line-height: 24.98px;
+      }
+    }
+  }
+}
+@media (max-width: 543px) {
+  .section {
+    padding: 6px 0;
+    .top {
+      height: 121px;
+      .top-paragraph {
+        padding-top: 30px;
+        line-height: 20.98px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+@media (max-width: 440px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 15.98px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 405px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 13.98px;
+        // font-size: 11px;
+      }
+    }
+  }
+}
+
+@media (max-width: 378px) {
+  .section {
+    .top {
+      .top-heading {
+        font-size: 20px;
+      }
+      .top-paragraph {
+        line-height: 12.98px;
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+@media (max-width: 330px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 11.98px;
+        font-size: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+.VisionProfile {
+  width: 100%;
+  height: 100%;
+  .content {
+    position: relative;
+    width: 100%;
+    height: clamp(87px, 19vw, 253px);
+    .cover {
+      padding: 20px;
+      position: relative;
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+      height: clamp(64px, 15vw, 203px);
+      background-color: gray;
+      label.EditCover {
+      font-size: clamp(5px, 2vw, 14px);
+        position: absolute;
+        border-radius: 10px;
+        top: 10px;
+        right: 10px;
+        background-color: var(--background);
+        color: var(--main-color);
+        border: none;
+        padding: 5px;
+        z-index: 5;
+        cursor: pointer;
+      }
+    }
+    .EditImage {
+      position: absolute;
+      bottom: clamp(5px, 2vw, 25px);
+      left: clamp(1px, 1vw, 10px);
+      z-index: 5;
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      .avatar {
+        width: clamp(42px, 8vw, 120px);
+        height: clamp(42px, 8vw, 120px);
+        object-fit: cover;
+        box-shadow: 4px 4px 2px 2px #0000004d;
+        cursor: pointer;
+        img {
+          height: 100%;
+        }
+      }
+      .userName {
+        display: flex;
+        flex-direction: column;
+        h1 {
+          font-size: clamp(14px, 2vw, 24px);
+          color: var(--background);
+          font-weight: 400;
+        }
+        p {
+          font-size: clamp(10px, 2vw, 14px);
+          color: var(--background);
+        }
+      }
+    }
+    button.EditFrom {
+      position: absolute;
+      border: none;
+      width: clamp(9px, 3vw, 25px);
+      height: clamp(9px, 3vw, 25px);
+      background-color: transparent;
+      bottom: 10px;
+      right: 10px;
+      img {
+        width: clamp(9px, 3vw, 25px);
+        height: clamp(9px, 3vw, 25px);
+      
+      }
+    }
+  }
+}

@@ -1,0 +1,147 @@
+#Try {
+  width: 100%;
+  h2 {
+    font-family: Abril Fatface;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 86.34px;
+    color: #004a60;
+    margin-bottom: 50px;
+    @media (max-width: 1034px) {
+      font-size: 45px;
+      margin-bottom: 30px;
+      line-height: 60.34px;
+    }
+    @media (max-width: 835px) {
+      font-size: 35px;
+      margin-bottom: 20px;
+      line-height: 56.34px;
+    }
+    @media (max-width: 600px) {
+      display: none;
+      font-size: 30px;
+      line-height: 45.34px;
+    }
+    @media (max-width: 390px) {
+      font-size: 24px;
+      line-height: 45.34px;
+    }
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    @media (max-width: 835px) {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .imgs {
+      @media (max-width: 835px) {
+        width: 100%;
+      }
+      > img {
+        width: 100%;
+        height: 220px;
+      }
+      > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5px;
+        img {
+          width: 100%;
+          height: 185px;
+          object-fit: cover;
+          @media (max-width: 835px) {
+            height: 170px;
+          }
+        }
+      }
+      .bg {
+        position: relative;
+        width: 100%;
+        height: 85px;
+        display: block;
+        div {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: #24242480;
+        }
+        img {
+          width: 100%;
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+    }
+    .item {
+      @media (max-width: 835px) {
+        width: 100%;
+      }
+      h4 {
+        font-family: Frank Ruhl Libre;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30.98px;
+        color: #004a60;
+        margin-bottom: 20px;
+      }
+      p {
+        font-family: Frank Ruhl Libre;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 25.82px;
+        letter-spacing: 0.05em;
+        color: #242424;
+        @media (max-width: 1034px) {
+          font-size: 18px;
+          line-height: 22px;
+        }
+        @media (max-width: 490px) {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+  .tabs {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    .index {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    button {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s ease;
+      background: none;
+      color: black;
+      border: 0;
+      font-family: Inter;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 24.2px;
+      cursor: pointer;
+      @media (max-width: 490px) {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+      &:hover {
+        background-color: #004a60;
+        color: white;
+        border-radius: 30px;
+      }
+    }
+  }
+}

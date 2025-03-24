@@ -1,0 +1,23 @@
+  .signInButton {
+    font-family: "Frank Ruhl Libre", serif;
+    max-width: 125px;
+    width: 100%;
+    font-size: clamp(14px, 1.5vw, 20px); // Резиновый размер шрифта
+    font-weight: 700;
+    line-height: 25.82px;
+    border-radius: 8px;
+    padding: clamp(6px, 1vw, 8px) clamp(15px, 2vw, 25px); // Резиновые отступы
+    background: #004a60;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background: #003d50;
+    }
+
+    @media (max-width: 1034px) {
+      max-width: 140px; // Уменьшаем максимальную ширину для адаптации
+    }
+  }

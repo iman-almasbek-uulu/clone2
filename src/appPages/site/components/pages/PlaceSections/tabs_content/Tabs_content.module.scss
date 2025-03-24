@@ -1,0 +1,37 @@
+.tabs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  @media (max-width: 835px) {
+    width: 100%;
+    max-width: 670px;
+    white-space: nowrap;
+  }
+
+  button {
+    flex-shrink: 0;
+    min-width: 100px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24.38px;
+    color: #242424;
+    border: 2px solid #242424;
+    border-radius: 8px;
+    text-align: center;
+    background: transparent;
+    transition: background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+
+    img {
+      max-width: 50%;
+    }
+  }
+}

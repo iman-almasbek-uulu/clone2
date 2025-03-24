@@ -1,0 +1,110 @@
+.burgerMenu {
+  position: relative;
+  .burgerIcon {
+    width: 40px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1000;
+    position: relative;
+
+    span {
+      width: 100%;
+      height: 4px;
+      background-color: #000;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+    span:nth-child(2) {
+      width: 80%;
+      margin-left: auto;
+    }
+
+    &.open {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+        transform: scale(0)
+      }
+
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(10px, -10px);
+      }
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 250px;
+  height: 100vh;
+  color: #fff;
+  transition: left 0.3s ease;
+  padding-top: 60px;
+  z-index: 999;
+  background: url("../../../../assets/images/auth/background.svg") no-repeat
+    center / cover;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100vh;
+    background-color: #24242480;
+    z-index: 0;
+  }
+  &.open {
+    left: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 15px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.menu.open {
+  animation: slideIn 0.3s ease forwards;
+
+  ul {
+    li {
+      animation: fadeIn 0.5s ease forwards;
+      animation-delay: calc(0.1s * var(--i)); // Задержка для каждого элемента
+    }
+  }
+}

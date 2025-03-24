@@ -1,0 +1,241 @@
+// Основные переменные
+$primary-color: #3b82f6; // blue-500
+$primary-hover: #2563eb; // blue-600
+$light-bg: rgba(0, 0, 0, 0.5); // полупрозрачный темный фон для модального окна
+$white: #ffffff;
+$dark-text: #1f2937; // gray-800
+$medium-text: #4b5563; // gray-600
+$light-text: #6b7280; // gray-700
+$border-color: #f3f4f6; // gray-100
+$tag-bg: #eff6ff; // blue-50
+$tag-text: #1d4ed8; // blue-700
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$spacing-unit: 4px;
+
+// Контейнер модального окна
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $light-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContainer {
+  background-color: $white;
+  border-radius: 0.5rem;
+  box-shadow: $shadow-lg;
+  width: 100%;
+  max-width: 823px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
+  padding: $spacing-unit * 3;
+  border-bottom: 1px solid $border-color;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: $medium-text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $border-color;
+  }
+}
+
+.modalContent {
+  padding: $spacing-unit * 4;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $dark-text;
+  margin-bottom: $spacing-unit * 6;
+  text-align: center;
+}
+
+// Список авиакомпаний
+.airlinesList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit * 6;
+}
+
+// Карточка авиакомпании
+.airlineCard {
+  background-color: $white;
+  border-radius: 0.5rem;
+  padding: $spacing-unit * 5;
+  box-shadow: $shadow-md;
+  transition: box-shadow 0.3s ease;
+  border: 1px solid $border-color;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-unit * 4;
+}
+
+.logo {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.logoRed {
+  color: #ef4444; // red-500
+}
+
+.logoGreen {
+  color: #10b981; // green-500
+}
+
+.logoBlue {
+  color: #3b82f6; // blue-600
+}
+
+.logoPurple {
+  color: #8b5cf6; // purple-600
+}
+
+.contentRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-unit * 4;
+  margin-bottom: $spacing-unit * 4;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+}
+
+.nameColumn {
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: 25%;
+  }
+}
+
+.airlineName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: $dark-text;
+}
+
+.descriptionColumn {
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: 33%;
+  }
+}
+
+.description {
+  font-size: 0.875rem;
+  color: $medium-text;
+}
+
+.destinationsColumn {
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: 42%;
+  }
+}
+
+.destinationsTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $light-text;
+  margin-bottom: $spacing-unit * 2;
+  display: flex;
+  align-items: center;
+}
+
+.destinationsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-unit * 2;
+}
+
+.destinationTag {
+  display: flex;
+  align-items: center;
+  background-color: $tag-bg;
+  padding: $spacing-unit ($spacing-unit * 2);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: $tag-text;
+}
+
+.destinationIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: $spacing-unit;
+  flex-shrink: 0;
+  color: $primary-color;
+}
+
+.planeIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: $spacing-unit * 2;
+  color: $primary-color;
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.button {
+  display: block;
+  text-align: center;
+  padding: $spacing-unit * 2 $spacing-unit * 4;
+  background-color: $primary-color;
+  color: $white;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  box-shadow: $shadow-sm;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}

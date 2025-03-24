@@ -1,0 +1,213 @@
+.section {
+  padding: 40px;
+  .top {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding-inline: 50px;
+    background-image: url("../../../../../../assets/images/cultureImages/bg.jpg");
+    background-position: center;
+    backdrop-filter: blur(10px);
+    @media (max-width: 500px) {
+      position: absolute;
+      width: 100%;
+      height: 151px;
+      top: 80px;
+      left: 0;
+      justify-content: center;
+    }
+    .muted-background {
+      background-color: rgba(195, 185, 185, 0.639);
+      backdrop-filter: blur(10px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+    .top-heading {
+      color: #004a60;
+      font-family: Abril Fatface;
+      font-size: clamp(28px, 5vw, 64px);
+      font-weight: 400;
+      text-align: center;
+      max-width: 369px;
+    }
+    .top-paragraph {
+      color: #000;
+      font-family: Frank Ruhl Libre;
+      font-size: clamp(12px, 5vw, 24px);
+      font-weight: 500;
+      line-height: 30.98px;
+      width: 714px;
+      text-align: center;
+    }
+  }
+  .main {
+    padding-top: 60px;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    @media (max-width: 666px) {
+      flex-direction: column;
+    }
+    img {
+      width: 574px;
+      height: 392px;
+      object-fit: contain;
+      @media (max-width: 1078px) {
+        width: 540px;
+      }
+      @media (max-width: 1034px) {
+        width: 480px;
+        height: auto;
+      }
+      @media (max-width: 926px) {
+        width: 450px;
+      }
+      @media (max-width: 835px) {
+        width: 300px;
+      }
+      @media (max-width: 666px) {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .main-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .main-heading {
+        font-size: clamp(17px, 5vw, 24px);
+        font-weight: 700;
+        line-height: 26px;
+      }
+      .main-paragraph {
+        max-width: 587px;
+        font-size: clamp(12px, 5vw, 20px);
+        font-weight: 400;
+
+        @media (max-width: 1144px) {
+          font-size: 18px;
+        }
+        @media (max-width: 1078px) {
+          font-size: 18px;
+        }
+        @media (max-width: 1034px) {
+          line-height: 20px;
+          font-size: 17px;
+        }
+        @media (max-width: 926px) {
+          font-size: 15px;
+        }
+        @media (max-width: 884px) {
+          font-size: 14px;
+          line-height: 18px;
+        }
+        @media (max-width: 835px) {
+          font-size: 12px;
+          line-height: 13px;
+        }
+        @media (max-width: 666px) {
+          font-size: 15px;
+          line-height: 19px;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 850px) {
+  .section {
+    .top {
+      gap: 40px;
+      padding: 0 30px;
+      .top-paragraph {
+        font-size: 22px;
+        line-height: 26.98px;
+      }
+    }
+  }
+}
+@media (max-width: 662px) {
+  .section {
+    .top {
+      .top-paragraph {
+        font-size: 18px;
+      }
+    }
+  }
+}
+@media (max-width: 613px) {
+  .section {
+    .top {
+      gap: 20px;
+      .top-paragraph {
+        line-height: 24.98px;
+      }
+    }
+  }
+}
+@media (max-width: 543px) {
+  .section {
+    .top {
+      gap: 20px;
+      .top-paragraph {
+        font-size: 14px;
+      }
+    }
+    .main {
+      padding-top: 10px;
+      gap: 10px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .section {
+    .top {
+      .top-paragraph {
+        font-size: 12px;
+        line-height: 17px;
+      }
+    }
+    .main {
+      padding-top: 130px;
+    }
+  }
+}
+@media (max-width: 472px) {
+  .section {
+    .main {
+      gap: 10px;
+    }
+  }
+}
+@media (max-width: 428px) {
+  .section {
+    padding: 0;
+    .top {
+      height: 120px;
+      gap: 10px;
+      .top-paragraph {
+        font-size: 10px;
+        line-height: 10.49px;
+        text-align: start;
+      }
+    }
+  }
+}
+
+@media (max-width: 362px) {
+  .section {
+    .top {
+      .top-heading {
+        font-size: 18px;
+      }
+      .top-paragraph {
+        line-height: 8.98px;
+      }
+    }
+  }
+}

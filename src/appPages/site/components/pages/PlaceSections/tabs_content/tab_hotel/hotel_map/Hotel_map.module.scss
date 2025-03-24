@@ -1,0 +1,25 @@
+.mapWrapper {
+  iframe {
+    width: 100%;
+    height: clamp(126px, 30vw, 300px); // Используем clamp для адаптивной высоты
+    border: none;
+    border-radius: 8px;
+    margin-bottom: clamp(20px, 5vw, 60px);
+  }
+}
+
+@media (max-width: 768px) {
+  .mapContainer {
+    padding: 15px;
+
+    h5 {
+      font-size: 18px; // Уменьшение размера заголовка для мобильной версии
+    }
+
+    .mapWrapper {
+      iframe {
+        height: clamp(126px, 40vw, 250px); // Адаптивная высота для мобильной версии
+      }
+    }
+  }
+}

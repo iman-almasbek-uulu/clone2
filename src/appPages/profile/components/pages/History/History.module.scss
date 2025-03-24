@@ -1,0 +1,136 @@
+.History {
+  .headerMobile {
+    display: none;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    justify-content: flex-end;
+    background: url("../../../../../assets/images/footerImages/footer.jpg");
+    padding: 5px clamp(30px, 5vw, 83px) 5px clamp(30px, 5vw, 63px);
+    gap: 10px;
+    .logo {
+      margin-right: auto;
+    }
+    .avatar {
+      justify-self: flex-end;
+      width: clamp(40px, 6vw, 120px);
+      height: clamp(40px, 6vw, 120px);
+    }
+    @media (max-width: 768px) {
+      display: flex;
+    }
+    .burgerMenu {
+      display: none;
+      @media (max-width: 768px) {
+        display: block;
+      justify-self: flex-end;
+
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+    background: #fff;
+    border-radius: 0 0 8px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px clamp(30px, 5vw, 83px) 0 clamp(30px, 5vw, 63px);
+    .headerUser {
+      width: 100%;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 90px;
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    .text {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      h1 {
+        color: rgb(0, 74, 96);
+        font-family: Abril Fatface;
+        font-size: clamp(32px, 4vw, 64px);
+        font-weight: 400;
+        line-height: clamp(11.29px, 1.25vw, 20px);
+        letter-spacing: -0.1px;
+        text-align: left;
+        margin-right: 535px;
+      }
+      .arrows {
+        display: flex;
+        gap: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+
+}
+
+
+
+.tabs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  @media (max-width: 835px) {
+    width: 100%;
+    max-width: 670px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  button {
+    flex-shrink: 0;
+    min-width: 100px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24.38px;
+    color: #242424;
+    border: 2px solid #242424;
+    border-radius: 8px;
+    text-align: center;
+    background: transparent;
+    transition: background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+    min-width: 100px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24.38px;
+    color: #242424;
+    border: 2px solid #242424;
+    border-radius: 8px;
+    text-align: center;
+    background: transparent;
+    transition: background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+
+    img {
+      max-width: 50%;
+    }
+    img {
+      max-width: 50%;
+    }
+  }
+}

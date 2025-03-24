@@ -1,0 +1,429 @@
+// Header.module.scss
+
+.Header {
+  width: 100%;
+  padding: 20px 0;
+  z-index: 10;
+  background: url("../../../../../assets/images/headerImages/header.jpg")
+    no-repeat center/cover;
+  background-color: #004a60;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: minmax(10%, auto) minmax(50%, 80%); // Логотип | Навигация + Кнопки
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    @media (max-width: 835px) {
+      grid-template-columns: auto 1fr; // Логотип | Бургер + Кнопка
+      gap: 10px;
+    }
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 100px;
+    font-family: "Frank Ruhl Libre", serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    justify-self: start;
+
+    @media (max-width: 835px) {
+      max-width: 80px;
+      justify-self: start; // Логотип остается слева
+    }
+  }
+
+  // Десктопная навигация
+  .desktopLayout {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr; // Навигация 1fr | Действия 0.5fr
+    align-items: center;
+    gap: 30px; // Отступ между навигацией и кнопками 10%
+    width: 100%;
+    justify-self: end;
+    justify-content: space-between;
+    @media (max-width: 835px) {
+      display: none; // Скрываем на мобильных
+    }
+  }
+
+  .desktopNav {
+    width: 100%;
+
+    .navList {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: clamp(10px, 2vw, 20px);
+      align-items: center;
+      list-style: none;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+
+      .navItem {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        flex-shrink: 0;
+
+        .navLink {
+          font-family: "Frank Ruhl Libre", serif;
+          font-weight: 700;
+          font-size: clamp(18px, 2vw, 24px);
+          line-height: 100%;
+          color: #003d50;
+          text-decoration: none;
+          padding: 0;
+          cursor: pointer;
+          transition: color 0.3s ease;
+          text-align: center;
+
+          &.active {
+            color: #fff;
+          }
+
+          &:hover {
+            color: #e6e9e6;
+          }
+        }
+
+        .regionDropdownWrapper {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: max-content;
+          z-index: 10;
+          margin-top: 10px;
+
+          .regionList {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 4px;
+            padding: 15px 30px;
+            list-style: none;
+            margin: 0;
+
+            .regionItem {
+              padding: 3px 0;
+
+              a {
+                font-family: "Frank Ruhl Libre", serif;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 25.82px;
+                color: #004a60;
+                text-decoration: none;
+                display: block;
+                text-align: center;
+
+                &:hover {
+                  color: #007bff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: clamp(10px, 2vw, 30px); // Резиновый отступ
+    align-items: center;
+    flex-wrap: nowrap; // Запрещаем перенос на новую строку
+    justify-content: flex-end;
+    @media (max-width: 1034px) {
+      gap: clamp(5px, 1.5vw, 10px); // Уменьшаем отступ для адаптации
+    }
+
+    @media (max-width: 835px) {
+      display: none; // Скрываем на мобильных
+    }
+  }
+
+  // Выбор языка
+  .languageSelector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #003d50;
+    .langSelect {
+      cursor: pointer;
+      padding: clamp(8px, 1vw, 10px) clamp(20px, 2vw, 40px); // Уменьшаем отступы
+      border: 1px solid #004a60;
+      border-radius: 8px;
+      background: transparent;
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: clamp(14px, 1.5vw, 20px);
+      font-weight: 700;
+      line-height: 25.82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px; // Отступ между текстом и стрелкой
+
+      &.open {
+        border-radius: 8px 8px 0 0; // Скругление углов только сверху
+        border-bottom: none; // Убираем нижнюю границу
+      }
+    }
+
+    .languageDropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      backdrop-filter: blur(4px);
+      background: #ffffff99;
+      border: 1px solid #004a60;
+      border-top: none; // Убираем верхнюю границу
+      border-radius: 0 0 8px 8px; // Скругление углов только снизу
+      z-index: 10;
+      margin-top: -1px; // Смещаем вверх, чтобы границы совпали
+
+      .languageOption {
+        padding: 10px 30px;
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: clamp(14px, 1.5vw, 20px);
+        font-weight: 700;
+        line-height: 25.82px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background: #003d50;
+          color: white;
+        }
+
+        span {
+          display: inline-block; // Текст внутри span
+        }
+      }
+    }
+
+    .dropdownArrow {
+      position: absolute;
+      top: 50%;
+      right: clamp(10px, 1.5vw, 15px);
+      transform: translateY(-50%);
+      width: clamp(18px, 2vw, 22px);
+      height: clamp(14px, 1.5vw, 18px);
+      pointer-events: none;
+    }
+  }
+
+
+
+  // Mobile Navigation
+  .mobileNav {
+    --bg-color: #80a9bd;
+    --text-color: #003d50;
+    --hover-bg: rgba(255, 255, 255, 0.2);
+
+    .topBar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      align-items: center;
+      // padding: 12px 15px;
+      background: transparent;
+    }
+
+    .burgerButton {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+
+      &:hover {
+        background: var(--hover-bg);
+      }
+    }
+
+    .mobileMenu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--bg-color);
+      overflow-y: auto;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+
+      &.open {
+        right: 0;
+      }
+    }
+
+    .closeButtonInner {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      padding: 8px;
+      color: var(--text-color);
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .menuContent {
+      padding: 60px 20px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navItems {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mobileLink {
+      display: block;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 16px;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--hover-bg);
+        transform: translateX(10px);
+      }
+
+      &.active {
+        background: var(--hover-bg);
+        font-weight: 700;
+      }
+    }
+
+    .regionWrapper {
+      position: relative;
+    }
+
+    .regionTrigger {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .chevron {
+      transition: transform 0.3s ease;
+      color: var(--text-color);
+
+      &.rotated {
+        transform: rotate(180deg);
+      }
+    }
+
+    .regionList {
+      margin-left: 20px;
+      padding: 8px 0;
+      border-left: 2px solid var(--text-color);
+    }
+
+    .regionItem {
+      display: block;
+      padding: 12px 18px;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--hover-bg);
+        padding-left: 25px;
+      }
+    }
+
+    .languageWrapper {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(0, 61, 80, 0.2);
+    }
+
+    .langButton {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--text-color);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--hover-bg);
+        transform: translateX(10px);
+      }
+
+      &.active {
+        background: rgba(255, 255, 255, 0.3);
+        font-weight: 700;
+      }
+    }
+
+    // Стилизация UserProfile
+    :global {
+      .userProfile {
+        color: var(--text-color) !important;
+
+        button {
+          background: rgba(255, 255, 255, 0.1) !important;
+          color: var(--text-color) !important;
+          border: 1px solid var(--text-color) !important;
+
+          &:hover {
+            background: var(--hover-bg) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Глобальный класс для активных элементов
+.active {
+  color: #fff !important;
+}

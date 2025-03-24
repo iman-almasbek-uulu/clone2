@@ -1,0 +1,129 @@
+.section {
+  padding: 40px 0;
+  @media (max-width: 835px) {
+    margin-top: 250px;
+  }
+  .top {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding-inline: 50px;
+    background-image: url("../../../../../assets/images/cultureImages/bg.jpg");
+    background-position: center;
+    backdrop-filter: blur(10px);
+    @media (max-width: 835px) {
+      padding-inline: 80px;
+      position: absolute;
+      width: 100%;
+      top: 104px;
+      left: 0;
+    }
+    .muted-background {
+      background-color: rgba(195, 185, 185, 0.639);
+      backdrop-filter: blur(10px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+    .top-heading {
+      color: #004a60;
+      font-family: Abril Fatface;
+      font-size: clamp(28px, 5vw, 64px);
+      font-weight: 400;
+      max-width: 250px;
+    }
+    .top-paragraph {
+      color: #000;
+      font-family: Frank Ruhl Libre;
+      font-size: clamp(12px, 5vw, 24px);
+      font-weight: 500;
+      line-height: 30.98px;
+      width: 100%;
+    }
+  }
+  .main {
+    padding-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    .img {
+      width: 100%;
+      height: 397px;
+      border: 1px solid black;
+    }
+    .main-text {
+      display: flex;
+      justify-content: flex-start;
+      gap: 30px;
+      align-items: flex-start;
+      flex-direction: column;
+      font-family: Montserrat;
+      width: 100%;
+      max-width: 600px;
+      height: 397px;
+      .main-heading {
+        font-size: clamp(17px, 5vw, 24px);
+        font-weight: 700;
+        line-height: 26px;
+      }
+      .main-paragraph {
+        max-width: 500px;
+        font-size: clamp(12px, 5vw, 20px);
+        font-weight: 400;
+      }
+    }
+  }
+}
+@media (max-width: 1023px) {
+  .main {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+@media (max-width: 814px) {
+  .section {
+    .top {
+      gap: 40px;
+      padding: 0 30px;
+      .top-paragraph {
+        font-size: 18px;
+        line-height: 26.98px;
+      }
+    }
+  }
+}
+@media (max-width: 613px) {
+  .section {
+    .top {
+      gap: 20px;
+      .top-paragraph {
+        line-height: 24.98px;
+      }
+    }
+  }
+}
+@media (max-width: 543px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 21.98px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 362px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 16.98px;
+      }
+    }
+  }
+}

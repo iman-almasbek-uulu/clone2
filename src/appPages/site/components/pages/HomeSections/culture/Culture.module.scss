@@ -1,0 +1,293 @@
+#Culture {
+  margin-top: 100px;
+  h2 {
+    font-family: 'Abril Fatface', serif;
+    font-weight: 400;
+    font-size: clamp(24px, 5vw, 64px);
+    line-height: 86.34px;
+    color: #004a60;
+  }
+}
+
+#Sliders {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0; // Стандартный padding
+  @media (max-width: 390px) {
+    padding: 30px 0 10px; // Уменьшенный padding для экранов 390px
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../../../../../assets/images/homeImages/culture.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px); // Размытие фона
+    z-index: -1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF99; // Полупрозрачный белый слой
+    z-index: -1; // Убедитесь, что он находится поверх размытого фона
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #FFFFFF99;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    position: relative; // Чтобы контент был поверх псевдоэлементов
+    z-index: 1; // Поднимаем контент над псевдоэлементами
+  }
+
+  .slider {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .slide {
+    width: 805px;
+    height: 546px;
+    text-align: center;
+    margin-right: 20px;
+    overflow: hidden;
+
+    @media (max-width: 992px) {
+      width: 100%;
+      height: auto;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 1px solid #ccc;
+
+    @media (max-width: 992px) {
+      height: auto;
+    }
+  }
+
+  .content {
+    width: 373px;
+    height: 546px;
+    padding: 20px;
+    background: white; // Белый фон
+    border-radius: 5px; // Скругление углов
+    box-shadow: 0px 0px 15px 0px #00000026;
+    position: relative;
+
+    @media (max-width: 992px) {
+      width: 100%;
+      height: auto;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #004a60;
+      line-height: 32px;
+      text-align: left;
+
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+    }
+
+    p {
+      color: #242424;
+      font-weight: 400;
+      line-height: 20px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-align: left;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
+    .butt {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: 153px;
+      height: 42px;
+      gap: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #3c5f63;
+      border-radius: 8px;
+      color: white;
+      border: none;
+      cursor: pointer;
+    
+      .arrow_right {
+        filter: invert(1);
+        width: 20px;
+        margin-left: 10px;
+      }
+    
+      @media (max-width: 992px) {
+        position: relative; // Изменяем на относительное позиционирование
+        right: 0; // Сбрасываем right
+        bottom: 0; // Сбрасываем bottom
+        margin-top: 20px;
+        margin-left: auto; // Выравниваем кнопку вправо
+        text-align: right; // Текст выравниваем по правому краю
+      }
+    }
+  }
+
+  .arrowBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    height: 40px;
+    margin: 40px auto 0; // Центрирование по горизонтали и отступ сверху
+    position: relative; // Для корректного позиционирования
+
+    @media (max-width: 992px) {
+      margin-top: 20px;
+    }
+  }
+
+  .arrowbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+    cursor: pointer;
+    text-align: center;
+
+    span {
+      color: #fff;
+      font-size: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 1000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .prev, .next {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    margin: 10px;
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  .prev {
+    left: 16px;
+  }
+
+  .next {
+    right: 16px;
+  }
+}
+
+/* Add these CSS styles to your Culture.module.scss file */
+
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin: 2rem 0;
+  color: #666;
+  width: 100%;
+  min-height: 300px;
+  
+  p {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.loadingSpinner {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.imagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background-color: #f0f0f0;
+  color: #777;
+  border-radius: 8px;
+  
+  p {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.active {
+  background: #3c5f63;
+  color: white;
+}

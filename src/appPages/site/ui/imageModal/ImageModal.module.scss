@@ -1,0 +1,239 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9); /* Более темный фон */
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px); /* Добавляем размытие для глубины */
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgba(18, 18, 24, 0.7); /* Темный фон с прозрачностью */
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+  z-index: 50;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  &:hover {
+    color: #d1d5db;
+  }
+}
+
+.navButton {
+  position: absolute;
+  color: white;
+  transition: color 0.2s;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+
+  &:hover {
+    color: #d1d5db;
+  }
+}
+
+.navButtonLeft {
+  left: 1rem;
+}
+
+.navButtonRight {
+  right: 1rem;
+}
+
+.mainImageContainer {
+  position: relative;
+  width: 90%;
+  height: 80vh;
+  max-width: 72rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background-color: rgba(15, 15, 20, 0.6); /* Темный фон контейнера */
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Добавляем тень */
+}
+
+.mainImage {
+  min-height: 50vh;
+  min-width: 50%;
+  max-height: 90%;
+  max-width: 90%;
+  object-fit: contain;
+  transition: opacity 0.3s ease-in-out;
+  background-color: rgba(30, 30, 40, 0.5); /* Темный фон для изображения */
+  border-radius: 4px;
+}
+
+.thumbnailsContainer {
+  width: 90%;
+  max-width: 72rem;
+  margin-top: 1rem;
+  background-color: rgba(20, 20, 28, 0.7); /* Темный фон для миниатюр */
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.thumbnailsScroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.thumbnailsList {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+}
+
+.thumbnailItem {
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  width: 7rem;
+  height: 5rem;
+  background-color: #1a1a24; /* Темный фон для миниатюр */
+
+  &.selected {
+    border: 2px solid #3b82f6; /* Синяя рамка для выбранной миниатюры */
+    transform: scale(1.05);
+  }
+
+  &:not(.selected) {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+      border-color: rgba(59, 130, 246, 0.5); /* Легкая синяя рамка при наведении */
+    }
+  }
+}
+
+.thumbnailImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.errorImage {
+  opacity: 0.8;
+  object-fit: contain !important;
+  border: 1px dashed #aaa;
+  background-color: #2a2a35; /* Более темный фон для ошибочных изображений */
+}
+
+.imageErrorContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1f1f2c; /* Темный фон для контейнера ошибки */
+  color: #d1d5db;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  
+  p {
+    margin-top: 15px;
+    font-size: 16px;
+  }
+  
+  svg {
+    color: #a1a1aa;
+  }
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loader {
+  border: 4px solid #2a2a35;
+  border-top: 4px solid #3b82f6; /* Синий цвет для лоадера */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .mainImage {
+    min-height: 40vh;
+    min-width: 60%;
+  }
+  
+  .thumbnailItem {
+    width: 5.5rem;
+    height: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainImage {
+    min-height: 35vh;
+    min-width: 80%;
+  }
+  
+  .thumbnailItem {
+    width: 4.5rem;
+    height: 3.5rem;
+  }
+  
+  .thumbnailsList {
+    justify-content: flex-start;
+  }
+  
+  .navButton {
+    padding: 0.25rem;
+  }
+  
+  .navButtonLeft {
+    left: 0.5rem;
+  }
+  
+  .navButtonRight {
+    right: 0.5rem;
+  }
+}

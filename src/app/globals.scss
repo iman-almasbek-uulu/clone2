@@ -1,0 +1,87 @@
+:root {
+  --background: #ffffff;
+  --active: #407ec7;
+  --main-color: #004a60;
+  --footer: ;
+  --silver: #26262672;
+  --input: #e5e4e9;
+  --font-frank: "Frank Ruhl Libre", serif;
+  --font-inter: "Inter", sans-serif;
+  --font-abril: "Abril Fatface", cursive;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  font-family: var(--font-frank);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input {
+  padding: 14px 15px;
+  font-family: "Playfair Display", sans-serif;
+  font-size: 18px;
+  outline: none;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 2px solid var(--input);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: 2px solid var(--main-color);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--background);
+}
+
+.container {
+  width: 100%;
+  max-width: 1226px;
+  margin: 0 auto;
+  padding: 0 15px;
+  z-index: 1;
+}
+
+@media (max-width: 1034px) {
+  .container {
+    max-width: 930px;
+  }
+}
+
+@media (max-width: 835px) {
+  .container {
+    max-width: 700px;
+  }
+}

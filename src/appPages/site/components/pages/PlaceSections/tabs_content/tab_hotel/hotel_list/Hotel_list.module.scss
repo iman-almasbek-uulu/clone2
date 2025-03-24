@@ -1,0 +1,272 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  h4 {
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 700;
+    // line-height: 39.01px;
+    color: #004a60;
+    line-height: clamp(20px, 5vw, 39.01px);
+
+    @media (max-width: 1024px) {
+      font-size: 28px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+      align-self: flex-start;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+  }
+  button {
+    cursor: pointer;
+    background-color: white;
+    border: 0;
+    font-family: Arial;
+    font-size: 21.84px;
+    font-weight: 400;
+    line-height: 34.31px;
+    color: #006699;
+  }
+}
+
+.list {
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  @media (max-width: 835px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .item {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px #00000026;
+    border-radius: 8px;
+    > img {
+      border-radius: 8px 8px 0 0;
+      width: 100%;
+      height: 271px;
+      object-fit: cover;
+      @media (max-width: 390px) {
+        height: 286px;
+      }
+    }
+    .block {
+      padding: 10px;
+      h6 {
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 29.26px;
+        color: #242424;
+        margin: 10px 0;
+      }
+      > div {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        .grade {
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 22.4px;
+        }
+        .stars {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          span {
+            width: 9px;
+            height: 9px;
+            background-color: #3c5f63;
+            border-radius: 10px;
+          }
+        }
+        .review {
+          font-family: Montserrat;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 16.8px;
+          color: #5a5a5a;
+          @media (max-width: 600px) {
+            width: 100%;
+          }
+          @media (max-width: 390px) {
+            width: auto;
+          }
+        }
+      }
+    }
+    .heart {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 39px;
+      height: 39px;
+      cursor: pointer;
+    }
+    .right {
+      position: absolute;
+      bottom: 15px;
+      cursor: pointer;
+      right: 15px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+/* Image fallback styles */
+.imageFallback {
+  border-radius: 8px 8px 0 0;
+  width: 100%;
+  height: 271px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  @media (max-width: 490px) {
+    height: 180px;
+    font-size: 16px;
+  }
+  @media (max-width: 390px) {
+    height: 286px;
+    font-size: 18px;
+  }
+}
+
+.heartFallback {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 39px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.rightFallback {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #004a60;
+  cursor: pointer;
+}
+
+/* Добавьте эти стили в ваш файл Hotel_list.module.scss */
+
+.hotelListContainer {
+  width: 100%;
+}
+
+.noHotelsContainer {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: 1px dashed #ccc;
+
+  p {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+  }
+
+  svg {
+    color: #888;
+  }
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinnerIcon {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.heart {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 2;
+}

@@ -1,0 +1,297 @@
+.hotel_item {
+  .info {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 62% 32%;
+    gap: 50px;
+    margin-top: 30px;
+    @media (max-width: 835px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      h6 {
+        font-family: Montserrat;
+        font-size: 21.91px;
+        font-weight: 700;
+        line-height: 26.71px;
+        color: #242424;
+        margin-bottom: 20px;
+      }
+      .titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: clamp(10px, 2vw, 15px);
+
+        @media (max-width: 576px) {
+          align-items: flex-start;
+        }
+
+        .title {
+          h5 {
+            font-family: Montserrat;
+            font-size: clamp(16px, 4vw, 27.89px);
+            font-weight: 700;
+            line-height: 1.2;
+            color: #242424;
+            margin: 0 0 clamp(4px, 1vw, 8px) 0;
+          }
+
+          p {
+            font-family: Montserrat;
+            font-size: clamp(11px, 2vw, 15.93px);
+            font-weight: 500;
+            line-height: 1.2;
+            text-align: left;
+            color: #9a9a9a;
+            margin: 0;
+          }
+        }
+
+        .links {
+          display: flex;
+          align-items: center;
+          gap: clamp(8px, 1.5vw, 15px);
+          position: relative;
+          @media (max-width: 576px) {
+            align-self: flex-end;
+            margin-top: 5px;
+          }
+          .iconHeart {
+            font-size: clamp(16px, 5vw, 30px);
+          }
+          .iconShare {
+            font-size: clamp(16px, 5vw, 30px);
+          }
+          button {
+            border: 0;
+            background: none;
+            cursor: pointer;
+            padding: clamp(3px, 0.5vw, 5px);
+          }
+          .like {
+            position: relative;
+          }
+          img {
+            &:first-child {
+              width: clamp(24px, 4vw, 37px);
+              height: clamp(18px, 3vw, 27px);
+            }
+
+            &:last-child {
+              width: clamp(18px, 3vw, 27px);
+              height: clamp(20px, 3.3vw, 30px);
+            }
+          }
+        }
+      }
+
+      .list {
+        display: flex;
+        justify-content: space-between;
+        gap: clamp(5px, 1vw, 10px);
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 5px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        div {
+          width: calc(25% - clamp(5px, 1vw, 10px));
+          min-width: clamp(70px, 15vw, 140px);
+          height: clamp(85px, 18vw, 160px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(4px, 2vw, 20px);
+          background: #eff0f2;
+          border-radius: 8px;
+          padding: clamp(3px, 1vw, 10px);
+
+          img {
+            width: clamp(26px, 4vw, 42px);
+            height: clamp(20px, 3vw, 32px);
+          }
+
+          svg {
+            width: clamp(24px, 4vw, 40px);
+            height: clamp(24px, 4vw, 40px);
+          }
+
+          span {
+            font-family: Montserrat;
+            font-size: clamp(10px, 1.8vw, 15.93px);
+            font-weight: 600;
+            line-height: 1.2;
+            color: #242424;
+            text-align: center;
+          }
+        }
+      }
+      .descr {
+        p {
+          font-family: Montserrat;
+          font-size: clamp(12px, 1.6vw, 14.94px);
+          font-weight: 400;
+          line-height: 1.35;
+          color: #9a9a9a;
+        }
+      }
+
+      .amen {
+        .amenities {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: clamp(10px, 2vw, 20px);
+          margin-bottom: clamp(15px, 3vw, 30px);
+          @media (max-width: 490px) {
+            grid-template-columns: 1fr;
+          }
+          div {
+            display: flex;
+            align-items: center;
+            gap: clamp(5px, 1vw, 10px);
+
+            img {
+              width: clamp(20px, 3vw, 30px);
+              height: clamp(20px, 3vw, 30px);
+            }
+
+            span {
+              font-family: Montserrat;
+              font-size: clamp(12px, 1.6vw, 14.94px);
+              font-weight: 500;
+              line-height: 1.3;
+              color: #242424;
+            }
+          }
+        }
+        button {
+          width: 100%;
+          max-width: clamp(180px, 25vw, 241px);
+          height: clamp(40px, 6vw, 60px);
+          border: 1px solid #242424;
+          background-color: white;
+          border-radius: 6px;
+          font-family: Montserrat;
+          font-size: clamp(12px, 1.6vw, 14.94px);
+          font-weight: 600;
+          line-height: 1.2;
+          color: #242424;
+        }
+      }
+
+      .safe {
+        .safe_list {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: clamp(8px, 1vw, 10px);
+          @media (max-width: 490px) {
+            grid-template-columns: 1fr;
+          }
+          div {
+            display: flex;
+            gap: clamp(5px, 1vw, 10px);
+            align-items: center;
+            img {
+              width: clamp(24px, 3vw, 32px);
+              height: clamp(24px, 3vw, 32px);
+            }
+            span {
+              font-family: Montserrat;
+              font-size: clamp(12px, 1.8vw, 15.93px);
+              font-weight: 500;
+              line-height: 1.2;
+              color: #242424;
+            }
+          }
+        }
+      }
+
+      /* Добавляем общие стили для заголовков h6, которые используются во всех секциях */
+      .descr h6,
+      .amen h6,
+      .safe h6 {
+        font-family: Montserrat;
+        font-size: clamp(16px, 2vw, 18px);
+        font-weight: 700;
+        line-height: 1.2;
+        color: #242424;
+        margin: 0 0 clamp(10px, 2vw, 15px) 0;
+      }
+    }
+    .right {
+      box-shadow: 0px 0px 15.93px 0px #c2c6cc99;
+      border-radius: 10px;
+      padding: 30px 20px 50px;
+      height: auto;
+      @media (max-width: 835px) {
+        margin-top: 20px;
+      }
+      .price {
+        font-family: Montserrat;
+        font-size: 21.91px;
+        font-weight: 700;
+        line-height: 26.71px;
+        color: #242424;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #e0e2e6;
+        padding-bottom: 30px;
+      }
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        li {
+          font-family: Montserrat;
+          font-size: 15.93px;
+          font-weight: 500;
+          line-height: 19.42px;
+          color: #9a9a9a;
+        }
+      }
+      button {
+        width: 100%;
+        height: 60px;
+        border-radius: 8px;
+        background: #004a60;
+        color: white;
+        border: 0;
+        font-family: Montserrat;
+        font-size: 14.94px;
+        font-weight: 700;
+        line-height: 18.21px;
+        margin-block: 30px;
+        cursor: pointer;
+      }
+      .call {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        div {
+          font-family: Montserrat;
+          font-size: 14.94px;
+          font-weight: 600;
+          line-height: 18.21px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #242424;
+          img {
+            width: 21px;
+            height: 21px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "regions": [
+    { "name": ["Чуй", "شوي", "Chui"], "path": "/chui" },
+    { "name": ["Ош", "أوش", "Osh"], "path": "/osh" },
+    { "name": ["Джалал-Абад", "جلال أباد", "Jalal-Abad"], "path": "/jalal-abad" },
+    { "name": ["Нарын", "نارين", "Naryn"], "path": "/naryn" },
+    { "name": ["Талас", "تالاس", "Talas"], "path": "/talas" },
+    { "name": ["Баткен", "باتكين", "Batken"], "path": "/batken" },
+    { "name": ["Иссык-Куль", "إيسيك كول", "Issyk-Kul"], "path": "/issyk-kul" }
+  ],
+  "culture": [
+    {
+      "name": ["Национальные инструменты", "الآلات الوطنية", "National Instruments"],
+      "path": "/culture/instruments"
+    },
+    {
+      "name": ["Национальная одежда", "الملابس الوطنية", "National Clothes"],
+      "path": "/culture/clothes"
+    },
+    {
+      "name": ["Ручная работа", "الحرف اليدوية", "Hand Crafts"],
+      "path": "/culture/crafts"
+    },
+    { "name": ["Кухня", "المطبخ", "Kitchen"], "path": "/culture/kitchen" },
+    { "name": ["Игры", "الألعاب", "Games"], "path": "/culture/games" }
+  ]
+}

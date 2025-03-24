@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .selected {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .navigation {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  .select {
+    font-family: Lexend;
+    font-weight: 700;
+    font-size: 20.43px;
+    line-height: 20.43px;
+    color: #004a60;
+    border: none;
+    box-shadow: 0px 0.85px 0.85px 0px #000e330d;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+      border-color: #4f46e5;
+    }
+  }
+
+  .navButton {
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 0.375rem;
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+
+    .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }

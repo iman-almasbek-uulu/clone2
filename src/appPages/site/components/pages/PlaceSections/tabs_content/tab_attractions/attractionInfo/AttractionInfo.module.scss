@@ -1,0 +1,192 @@
+.container {
+    padding: clamp(1rem, 2vw, 2rem);
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-family: 'Abril Fatface', serif;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 4vw, 4rem);
+    line-height: 1.35;
+    color: #004A60;
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    
+
+  }
+  
+  .content {
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.25rem);
+    
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  .imageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.625rem, 1.5vw, 1.25rem);
+    width: 486px; // Fixed width for desktop
+    
+    @media (max-width: 1024px) {
+      width: 100%;
+      max-width: 486px;
+    }
+  }
+  
+  .mainImage {
+    width: 100%;
+    height: 543px; // Fixed height for desktop
+    border-radius: clamp(0.375rem, 1vw, 0.5rem);
+    object-fit: cover;
+    
+    @media (max-width: 1024px) {
+      height: clamp(300px, 50vw, 543px);
+    }
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // Always 3 columns
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .thumbnail {
+    width: 100%;
+    height: 118px; // Height for desktop thumbnails
+    border-radius: clamp(0.25rem, 0.75vw, 0.5rem);
+    cursor: pointer;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+    
+    @media (max-width: 1024px) {
+      height: clamp(80px, 15vw, 118px);
+    }
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  .textContainer {
+    flex: 1;
+    min-width: 280px;
+    
+    @media (max-width: 1024px) {
+      width: 100%;
+      max-width: 800px;
+    }
+  }
+  
+  .description {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    line-height: 1.4;
+    color: #242424;
+    margin-bottom: clamp(1rem, 2vw, 2rem);
+  }
+  
+  .list {
+    font-family: 'Montserrat', sans-serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      font-size: clamp(1rem, 1.5vw, 1.5rem);
+      line-height: 1.4;
+      margin-bottom: clamp(0.5rem, 1vw, 1rem);
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+
+  /* Add these CSS styles to your AttractionInfo.module.scss file */
+
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin: 1rem 0;
+  color: #666;
+  min-height: 300px;
+  
+  p {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.loadingSpinner {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.noImagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background-color: #f0f0f0;
+  color: #777;
+  border-radius: 8px;
+  
+  p {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.thumbnailContainer {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin-right: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.thumbnailPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  color: #777;
+}
+
+.activeThumbnail {
+  border: 2px solid #004A60;
+}
+
+.icon {
+  margin-right: 6px;
+  vertical-align: text-bottom;
+}

@@ -1,0 +1,205 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  min-height: auto; // Высота адаптируется под контент
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin: 0 20px;
+  overflow-y: auto;
+
+  @media (max-width: 1200px) {
+    max-width: 90%;
+    padding: 24px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 95%;
+    padding: 16px;
+    max-height: 90vh; // Ограничиваем максимальную высоту на маленьких экранах
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 32px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.uploadContainer {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
+}
+
+.uploadBlock {
+  width: 268px;
+  height: 268px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  &.selected {
+    border-color: #0066cc;
+    background-color: #f0f7ff;
+  }
+
+  @media (max-width: 768px) {
+    width: 45%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  @media (max-width: 390px) {
+    width: 144px;
+    height: 144px;
+  }
+
+  @media (max-width: 320px) {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.uploadIcon {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.uploadText {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+.sizeText {
+  font-size: 12px;
+  color: #666;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+}
+
+.previewContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hiddenInput {
+  display: none;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  .sendButton {
+    display: block;
+    max-width: 200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: #004d5f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+   
+  
+    &:hover:not(:disabled) {
+      background-color: #0052a3;
+    }
+  
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    &:nth-child(1) {
+      width: 100px;
+      padding: 6px 24px;
+      background-color: transparent;
+      color: #ccc;
+      border: none;
+      border-radius: 0;
+      border-bottom: 2px solid #ccc;
+      &:hover:not(:disabled) {
+        background-color: transparent;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+}
