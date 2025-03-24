@@ -1,7 +1,7 @@
 "use client";
 import scss from "./SignInPage.module.scss";
 import { usePostLoginMutation } from "@/redux/api/auth";
-import { ConfigProvider, Input, Switch, Button } from "antd";
+import { ConfigProvider, Input, Switch, Button, message } from "antd";
 import Link from "next/link";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm, Controller, Control, UseFormHandleSubmit, RegisterOptions, FieldErrors } from "react-hook-form";
@@ -23,9 +23,9 @@ interface InputFieldProps {
 const InputField: FC<InputFieldProps> = ({ name, control, rules, placeholder, errors }) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const regex = /^[A-Za-z0-9@._-]*$/; // Разрешаем только английские буквы, цифры и символы @ . _ -
+    const regex = /^[A-Za-z0-9@._-]*$/;
     if (!regex.test(value)) {
-      e.target.value = value.replace(/[^A-Za-z0-9@._-]/g, ''); // Удаляем все недопустимые символы
+      e.target.value = value.replace(/[^A-Za-z0-9@._-]/g, '');
     }
   };
 
@@ -61,9 +61,9 @@ interface PasswordFieldProps {
 const PasswordField: FC<PasswordFieldProps> = ({ name, control, rules, placeholder, errors }) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const regex = /^[A-Za-z0-9!@#$%^&*()_+]*$/; // Разрешаем только английские буквы, цифры и специальные символы
+    const regex = /^[A-Za-z0-9!@#$%^&*()_+]*$/;
     if (!regex.test(value)) {
-      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*()_+]/g, ''); // Удаляем все недопустимые символы
+      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*()_+]/g, '');
     }
   };
 
@@ -102,13 +102,13 @@ const PasswordField: FC<PasswordFieldProps> = ({ name, control, rules, placehold
   );
 };
 
-
 interface LoginFormProps {
   handleSubmit: UseFormHandleSubmit<IFormInput>;
   control: Control<IFormInput>;
   errors: FieldErrors<IFormInput>;
   handleRememberMeChange: (checked: boolean) => void;
   onSubmit: SubmitHandler<IFormInput>;
+  loginError?: string;
 }
 
 const LoginForm: FC<LoginFormProps> = ({
@@ -117,11 +117,19 @@ const LoginForm: FC<LoginFormProps> = ({
   errors,
   handleRememberMeChange,
   onSubmit,
+  loginError,
 }) => {
   const { t } = useTranslate();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {loginError && (
+        <p className={scss.loginError}>
+          <span>
+          {t("Логин или пароль не верный", "اسم المستخدم أو كلمة المرور غير صحيحة", "Incorrect login or password")}</span>
+        </p>
+      )}
+      
       {errors.email && <span className={scss.error}>{errors.email.message}</span>}
       <InputField
         name="email"
@@ -181,6 +189,7 @@ const SignInPage: FC = () => {
   const { t } = useTranslate();
   const [postLoginMutation] = usePostLoginMutation();
   const [rememberMe, setRememberMe] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   const {
     control,
@@ -193,17 +202,23 @@ const SignInPage: FC = () => {
       email: userData.email,
       password: userData.password,
     };
+    
     try {
       const response = await postLoginMutation(datalogin);
+      
       if ("data" in response && response.data?.access) {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem("accessToken", JSON.stringify(response.data));
+        window.location.reload();
+      } else if ("error" in response) {
+        // Обработка ошибки авторизации
+        setLoginError("Логин или пароль не верный");
+        message.error(t("Логин или пароль не верный", "اسم المستخدم أو كلمة المرور غير صحيحة", "Incorrect login or password"));
       }
-
-      window.location.reload();
-      console.log(response.data);
     } catch (e) {
       console.error("An error occurred:", e);
+      setLoginError("Логин или пароль не верный");
+      message.error(t("Логин или пароль не верный", "اسم المستخدم أو كلمة المرور غير صحيحة", "Incorrect login or password"));
     }
   };
 
@@ -221,6 +236,7 @@ const SignInPage: FC = () => {
         errors={errors}
         handleRememberMeChange={handleRememberMeChange}
         onSubmit={onSubmit}
+        loginError={loginError || undefined}
       />
       <div className={scss.nav}>
         <p>{t("У вас нет аккаунта?", "ليس لديك حساب؟", "Don't have an account?")}</p>
