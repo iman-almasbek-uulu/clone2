@@ -1,6 +1,6 @@
 .cafes {
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 0px;
   &_title {
     width: 100%;
     display: flex;
@@ -50,7 +50,7 @@
   .list {
     /* Минимальные изменения только для обеспечения горизонтального скролла */
     display: flex; /* Было: display: grid */
-    overflow-x: auto; /* Явно указываем горизонтальный скролл */
+    // overflow-x: auto; /* Явно указываем горизонтальный скролл */
     /* grid-template-columns: repeat(4,280px); - убрано */
     margin-top: 30px;
     gap: 30px;
