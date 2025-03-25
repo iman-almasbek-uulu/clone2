@@ -3,6 +3,7 @@ import styles from "./CultureGames.module.scss";
 import Image from "next/image";
 import { useGetGamesQuery } from "@/redux/api/culture";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
+import horse1 from "../../../../../../assets/images/galleryImages/horse1.png";
 
 interface GameProps {
   title: string;
@@ -11,7 +12,12 @@ interface GameProps {
   imageAlt: string;
 }
 
-const Game: React.FC<GameProps> = ({ title, description, imageSrc, imageAlt }) => {
+const Game: React.FC<GameProps> = ({
+  title,
+  description,
+  imageSrc,
+  imageAlt,
+}) => {
   return (
     <article className={styles.game}>
       <div className={styles.game__imageContainer}>
@@ -33,8 +39,19 @@ const Game: React.FC<GameProps> = ({ title, description, imageSrc, imageAlt }) =
 };
 
 const GamesPage: React.FC = () => {
-  const { data } = useGetGamesQuery();
+  const { data, isLoading } = useGetGamesQuery();
   const { t } = useTranslate();
+  if (isLoading) {
+    return (
+      <div className={styles.loading__container}>
+        <div className={styles.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`container ${styles.container}`}>

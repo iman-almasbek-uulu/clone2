@@ -6,10 +6,22 @@ import { useGetPopularPlacesQuery } from "@/redux/api/regions";
 import Stars from "@/appPages/site/ui/stars/Stars";
 import LikePost from "../regionSections/places/LikePost";
 import Image from "next/image";
+import horse1 from "../../../../../assets/images/galleryImages/horse1.png";
 
 const Gallery = () => {
   const { t } = useTranslate();
-  const { data: popular } = useGetPopularPlacesQuery();
+  const { data: popular, isLoading } = useGetPopularPlacesQuery();
+  if (isLoading) {
+    return (
+      <div className={scss.loading__container}>
+        <div className={scss.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section id={scss.Gallery}>

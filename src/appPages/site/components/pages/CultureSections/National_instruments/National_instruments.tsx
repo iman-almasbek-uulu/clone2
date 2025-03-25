@@ -3,16 +3,27 @@ import useTranslate from "@/appPages/site/hooks/translate/translate";
 import styles from "./National_instruments.module.scss";
 import { useGetNationalInstrumentQuery } from "@/redux/api/culture";
 import Image from "next/image";
+import horse1 from "../../../../../../assets/images/galleryImages/horse1.png";
 
 const National_instruments = () => {
   const { t } = useTranslate();
-  const { data } = useGetNationalInstrumentQuery();
+  const { data, isLoading } = useGetNationalInstrumentQuery();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
+  if (isLoading) {
+    return (
+      <div className={styles.loading__container}>
+        <div className={styles.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
   if (!isClient) {
     return null; // Не рендерить на сервере
   }
@@ -40,15 +51,15 @@ const National_instruments = () => {
         {data?.map((el, idx) => (
           <div key={idx} className={styles.main}>
             {el.national_image && (
-              <Image 
-                src={el.national_image} 
-                alt={el.national_name || "National instrument"} 
+              <Image
+                src={el.national_image}
+                alt={el.national_name || "National instrument"}
                 width={574}
                 height={392}
                 style={{
                   maxWidth: "100%",
                   height: "auto",
-                  objectFit: "contain"
+                  objectFit: "contain",
                 }}
               />
             )}
