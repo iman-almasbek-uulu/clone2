@@ -10,8 +10,10 @@ import VisionProfile from "./VisionProfile/VisionProfile";
 import { Avatar, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import BurgerMenu from "@/appPages/site/ui/BurgerMenu/BurgerMenu";
+import useTranslate from "@/appPages/site/hooks/translate/translate";
 
 const Profile: FC = () => {
+  const { t } = useTranslate();
   const [tab, setTab] = useState(false);
 
   const [PatchMeRequest] = usePatchMeMutation();
@@ -27,25 +29,13 @@ const Profile: FC = () => {
       phone_number: userData.phone_number,
       birth_date: userData.birth_date,
     };
-    console.log(
-      "🚀 ~ constonSubmit:SubmitHandler<AUTH.PatchMeRequest>= ~ userDataRest:",
-      userDataRest
-    );
 
     try {
       const response = await PatchMeRequest(userDataRest);
-      console.log(
-        "🚀 ~ constonSubmit:SubmitHandler<AUTH.PatchMeRequest>= ~ response:",
-        response
-      );
       if (response.data) {
         // window.location.reload();
       }
     } catch (e) {
-      console.log(
-        "🚀 ~ constonSubmit:SubmitHandler<AUTH.PatchMeRequest>= ~ e:",
-        e
-      );
       console.error("An error occurred:", e);
     }
   };
@@ -79,7 +69,13 @@ const Profile: FC = () => {
           <SearchProfile />
           <User />
         </div>
-        <h2 className="title">Personal information</h2>
+        <h2 className="title">
+          {t(
+            "Персональная информация",
+            "المعلومات الشخصية",
+            "Personal information"
+          )}
+        </h2>
         <div className={scss.ProfileCover}>
           <VisionProfile />
         </div>
@@ -90,16 +86,18 @@ const Profile: FC = () => {
                 <>
                   <h3>{el?.email}</h3>
                   <div className={scss.userName}>
-                    <p>Name</p>
-                    <p>Surname</p>
+                    <p>{t("Имя", "الاسم", "Name")}</p>
+                    <p>{t("Фамилия", "الكنية", "Surname")}</p>
                     <h3>{el?.first_name}</h3>
                     <h3>{el?.last_name}</h3>
-                    <p>Phone number</p>
-                    <p>Birth date</p>
+                    <p>{t("Номер телефона", "رقم الهاتف", "Phone number")}</p>
+                    <p>{t("Дата рождения", "تاريخ الميلاد", "Birth date")}</p>
                     <h3>{el?.phone_number}</h3>
                     <h3>{el?.birth_date}</h3>
                   </div>
-                  <button onClick={() => setTab(!tab)}>Редактировать</button>
+                  <button onClick={() => setTab(!tab)}>
+                    {t("Редактировать", "تعديل", "Edit")}
+                  </button>
                 </>
               </form>
             ))}
@@ -110,47 +108,69 @@ const Profile: FC = () => {
               <input
                 type="text"
                 {...register("email", { required: true })}
-                placeholder={`${el.email! ? el.email : "Email"}`}
+                placeholder={`${el.email! ? el.email : t(
+                  "Email",
+                  "البريد الإلكتروني",
+                  "Email"
+                )}`}
               />
               <div className={scss.userName}>
                 <p>
-                  Name <span>*</span>
+                  {t("Имя", "الاسم", "Name")} <span>*</span>
                 </p>
                 <p>
-                  Surname <span>*</span>
+                  {t("Фамилия", "الكنية", "Surname")} <span>*</span>
                 </p>
                 <input
                   type="text"
                   {...register("first_name", { required: true })}
-                  placeholder={`${el.first_name! ? el.first_name : "Name"}`}
+                  placeholder={`${el.first_name! ? el.first_name : t(
+                    "Имя",
+                    "الاسم",
+                    "Name"
+                  )}`}
                 />
                 <input
                   type="text"
                   {...register("last_name", { required: true })}
-                  placeholder={`${el.last_name! ? el.last_name : "Surname"}`}
+                  placeholder={`${el.last_name! ? el.last_name : t(
+                    "Фамилия",
+                    "الكنية",
+                    "Surname"
+                  )}`}
                 />
                 <p>
-                  Phone number <span>*</span>
+                  {t("Номер телефона", "رقم الهاتف", "Phone number")} <span>*</span>
                 </p>
                 <p>
-                  Birth date <span>*</span>
+                  {t("Дата рождения", "تاريخ الميلاد", "Birth date")} <span>*</span>
                 </p>
                 <input
                   type="text"
                   {...register("phone_number", { required: true })}
                   placeholder={`${
-                    el.phone_number! ? el.phone_number : "Phone number"
+                    el.phone_number! ? el.phone_number : t(
+                      "Номер телефона",
+                      "رقم الهاتف",
+                      "Phone number"
+                    )
                   }`}
                 />
                 <input
                   type="date"
                   {...register("birth_date", { required: true })}
                   placeholder={`${
-                    el.birth_date! ? el.birth_date : "Birth date"
+                    el.birth_date! ? el.birth_date : t(
+                      "Дата рождения",
+                      "تاريخ الميلاد",
+                      "Birth date"
+                    )
                   }`}
                 />
               </div>
-              <button type="submit">Сохранить</button>
+              <button type="submit">
+                {t("Сохранить", "حفظ", "Save")}
+              </button>
             </form>
           ))
         )}
