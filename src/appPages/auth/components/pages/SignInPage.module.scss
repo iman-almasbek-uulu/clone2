@@ -47,6 +47,13 @@
     @media (max-width: 768px) {
       width: 100%;
     }
+
+    .loginError {
+      color: #ff4d4f;
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
     input {
       width: 100%;
       font-family: "inter", sans-serif;

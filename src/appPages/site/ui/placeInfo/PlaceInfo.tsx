@@ -16,17 +16,17 @@ interface RegionProps {
   lon?: string;
 }
 
-const PlaceInfo: React.FC<RegionProps> = ({ 
-  data, 
-  lat = "42.8746", 
-  lon = "74.5698" 
+const PlaceInfo: React.FC<RegionProps> = ({
+  data,
+  lat = "42.8746",
+  lon = "74.5698",
 }) => {
   // Хук должен быть вызван на верхнем уровне компонента, независимо от условий
   const { data: weatherData } = useGetWeatherQuery({ lat, lon });
-  
+
   // Затем можно использовать условную логику для рендеринга
   if (!data) return null;
-  
+
   return (
     <section id={scss.Places}>
       <div className="container">

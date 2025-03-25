@@ -38,13 +38,37 @@
   }
   form {
     width: 636px;
-    display: flex;
+    display: grid;
     gap: 15px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     @media (max-width: 768px) {
       width: 100%;
+    }
+    .Remember {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+      color: var(--silver);
+      text-decoration: none;
+      font-family: "inter", sans-serif;
+      font-size: clamp(12px, 2vw, 20px);
+      font-weight: 500;
+      justify-self: flex-start;
+      .customCheckbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        margin-right: auto;
+        border: none;
+      }
+      p {
+        justify-self: flex-start;
+      }
     }
     .castomFrom {
       width: 100%;
@@ -130,15 +154,7 @@
       }
     }
    
-    .customCheckbox {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: auto;
-      height: auto;
-      margin-right: auto;
-      border: none;
-    }
+  
     .submit {
       width: 100%;
       height: 54px;

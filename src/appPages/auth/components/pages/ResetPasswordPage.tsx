@@ -39,9 +39,9 @@ const ResetPasswordPage = () => {
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const regex = /^[A-Za-z0-9!@#$%^&*()_+]*$/; // Разрешаем только английские буквы, цифры и специальные символы
+    const regex = /^[A-Za-z0-9!@#$%^&*_.]*$/; 
     if (!regex.test(value)) {
-      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*()_+]/g, ''); // Удаляем все недопустимые символы
+      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*_.]/g, ''); 
     }
   };
 

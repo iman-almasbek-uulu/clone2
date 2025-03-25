@@ -1,13 +1,13 @@
 "use client"; // Добавляем директиву, чтобы компонент стал клиентским
-
 import { useEffect, useState } from "react";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import styles from "./National_clothes.module.scss";
 import { useGetCultureNationalClothesQuery } from "@/redux/api/culture";
+import horse1 from "../../../../../../assets/images/galleryImages/horse1.png";
 
 const National_clothes = () => {
   const { t } = useTranslate();
-  const { data, isError } = useGetCultureNationalClothesQuery();
+  const { data, isError, isLoading } = useGetCultureNationalClothesQuery();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,17 @@ const National_clothes = () => {
   if (!isClient) {
     return null; // Не рендерить на сервере
   }
-
+  if (isLoading) {
+    return (
+      <div className={styles.loading__container}>
+        <div className={styles.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
   if (isError) return null;
 
   return (

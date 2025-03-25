@@ -1,7 +1,7 @@
 "use client";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import styles from "./Currency.module.scss";
-
+import horse1 from "../../../../../../assets/images/galleryImages/horse1.png";
 import Image from "next/image";
 import { useMeasure } from "react-use";
 import { useGetCurencyQuery } from "@/redux/api/culture";
@@ -12,7 +12,17 @@ const Currency = () => {
   const [ref, { height }] = useMeasure<HTMLDivElement>();
   const { data: currencyData, error, isLoading } = useGetCurencyQuery();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <div className={styles.loading__container}>
+        <div className={styles.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
   if (error) return <p>Error loading currency data</p>;
 
   const currency = currencyData?.[0];

@@ -24,50 +24,51 @@ export const Hero: FC = () => {
   const { data } = useGetRegionListQuery();
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
   // Function to get the current website URL
   const getCurrentUrl = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       return encodeURIComponent(window.location.href);
     }
-    return '';
+    return "";
   };
 
   // Function to get the website title
   const getShareTitle = () => {
-    return encodeURIComponent(t(
-      "Добро пожаловать в удивительный Кыргызстан!",
-      "مرحبًا بكم في قيرغيزستان المذهلة!",
-      "Welcome to the amazing Kyrgyzstan!"
-    ));
+    return encodeURIComponent(
+      t(
+        "Добро пожаловать в удивительный Кыргызстан!",
+        "مرحبًا بكم في قيرغيزستان المذهلة!",
+        "Welcome to the amazing Kyrgyzstan!"
+      )
+    );
   };
 
   // Define social network icons with sharing URLs
   const socialIcons: SocialIcon[] = [
-    { 
-      src: imgInst.src, 
-      alt: "Instagram", 
+    {
+      src: imgInst.src,
+      alt: "Instagram",
       className: scss.ins,
       // Instagram doesn't have a direct sharing API, usually opens the app
-      shareUrl: "https://www.instagram.com/" 
+      shareUrl: "https://www.instagram.com/",
     },
-    { 
-      src: imgFC.src, 
-      alt: "Facebook", 
+    {
+      src: imgFC.src,
+      alt: "Facebook",
       className: scss.facebook,
-      shareUrl: `https://www.facebook.com/sharer/sharer.php?u=${getCurrentUrl()}`
+      shareUrl: `https://www.facebook.com/sharer/sharer.php?u=${getCurrentUrl()}`,
     },
-    { 
-      src: imgVk.src, 
-      alt: "VKontakte", 
+    {
+      src: imgVk.src,
+      alt: "VKontakte",
       className: scss.vk,
-      shareUrl: `https://vk.com/share.php?url=${getCurrentUrl()}&title=${getShareTitle()}`
+      shareUrl: `https://vk.com/share.php?url=${getCurrentUrl()}&title=${getShareTitle()}`,
     },
-    { 
-      src: imgMail.src, 
-      alt: "Mail", 
+    {
+      src: imgMail.src,
+      alt: "Mail",
       className: scss.mail,
-      shareUrl: `mailto:?subject=${getShareTitle()}&body=${getCurrentUrl()}`
+      shareUrl: `mailto:?subject=${getShareTitle()}&body=${getCurrentUrl()}`,
     },
   ];
 
@@ -79,9 +80,9 @@ export const Hero: FC = () => {
       navigator.clipboard.writeText(window.location.href);
       return;
     }
-    
+
     // Open sharing window for other social networks
-    window.open(url, '_blank', 'width=600,height=400');
+    window.open(url, "_blank", "width=600,height=400");
   };
 
   const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,9 +123,11 @@ export const Hero: FC = () => {
 
             <div className={scss.icons1}>
               {socialIcons.map((icon, index) => (
-                <div key={index} 
-                     onClick={() => handleSocialShare(icon.shareUrl, icon.alt)} 
-                     style={{ cursor: 'pointer' }}>
+                <div
+                  key={index}
+                  onClick={() => handleSocialShare(icon.shareUrl, icon.alt)}
+                  style={{ cursor: "pointer" }}
+                >
                   <Image
                     className={icon.className}
                     src={icon.src}
@@ -155,10 +158,15 @@ export const Hero: FC = () => {
                 onFocus={() => setIsDropdownVisible(!!isFilter)}
               />
               {isDropdownVisible && (
-                <div className={`${scss.filter} ${scss.visible}` } ref={dropdownRef}>
+                <div
+                  className={`${scss.filter} ${scss.visible}`}
+                  ref={dropdownRef}
+                >
                   {data
                     ?.filter((region) =>
-                      region.region_name.toLowerCase().includes(isFilter.toLowerCase())
+                      region.region_name
+                        .toLowerCase()
+                        .includes(isFilter.toLowerCase())
                     )
                     .map((region) => (
                       <Link

@@ -1,12 +1,23 @@
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import styles from "./Hand_crafts.module.scss";
-import Image from "next/image"; // Добавляем импорт компонента Image
+import Image from "next/image";
 import { useGetHandCraftsQuery } from "@/redux/api/culture";
+import horse1 from "../../../../../../assets/images/galleryImages/horse1.png";
 
 const Hand_crafts = () => {
   const { t } = useTranslate();
-  const { data } = useGetHandCraftsQuery(); // Удалено неиспользуемое isError
-
+  const { data, isLoading } = useGetHandCraftsQuery();
+  if (isLoading) {
+    return (
+      <div className={styles.loading__container}>
+        <div className={styles.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
   return (
     <section className={styles.section}>
       <div className="container">
@@ -25,15 +36,15 @@ const Hand_crafts = () => {
         </div>
         {data?.map((el, idx) => (
           <div key={idx} className={styles.main}>
-            <Image 
-              src={el.hand_image} 
-              alt={el.hand_name || "Handcraft image"} 
-              width={486} 
+            <Image
+              src={el.hand_image}
+              alt={el.hand_name || "Handcraft image"}
+              width={486}
               height={324}
               style={{
                 objectFit: "cover",
                 maxWidth: "100%",
-                height: "auto"
+                height: "auto",
               }}
             />
             <div className={styles["main-text"]}>
