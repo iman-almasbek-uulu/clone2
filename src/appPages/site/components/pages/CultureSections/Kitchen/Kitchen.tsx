@@ -9,6 +9,7 @@ import {
 } from "@/redux/api/culture";
 import sanitizeHtml from "sanitize-html";
 import Image from "next/image";
+import horse1 from "../../../../../../assets/images/galleryImages/horse1.png";
 
 const Kitchen = () => {
   const { t } = useTranslate();
@@ -21,7 +22,15 @@ const Kitchen = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loading__container}>
+        <div className={styles.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
   }
 
   if (isError) {

@@ -1,43 +1,54 @@
-"use client"; // Добавляем директиву, чтобы компонент был клиентским
+"use client";
 
 import { useGetRegionListQuery } from "@/redux/api/regions";
-import { usePathname, useRouter } from "next/navigation"; // Используем useRouter из Next.js
+import { usePathname, useRouter } from "next/navigation";
 import { FC, ReactNode, useEffect } from "react";
+import horse1 from "../assets/images/galleryImages/horse1.png";
+import scss from "./RegionProvider.module.scss";
 
 interface RegionProviderProps {
   children: ReactNode;
 }
 
 export const RegionProvider: FC<RegionProviderProps> = ({ children }) => {
-  const { data } = useGetRegionListQuery();
-
   const pathName = usePathname();
-  const router = useRouter(); // Заменяем useNavigate на useRouter
-
-  const handleNavigate = () => {
-    switch (pathName) {
-      case "/talas":
-      case "/chui":
-      case "/issyk-kyl":
-      case "/jalal-abad":
-      case "/naryn":
-      case "/osh":
-      case "/batken":
-        if (!data) {
-          router.push("/404"); // Используем router.push для навигации
-        }
-        break;
-      case "/404":
-        if (data) {
-          router.push("/talas");
-        }
-        break;
-    }
-  };
+  const router = useRouter();
+  const { data, isLoading } = useGetRegionListQuery();
 
   useEffect(() => {
-    handleNavigate();
-  }, [data, pathName, router]);
+    if (!isLoading) {
+      switch (pathName) {
+        case "/talas":
+        case "/chui":
+        case "/issyk-kyl":
+        case "/jalal-abad":
+        case "/naryn":
+        case "/osh":
+        case "/batken":
+          if (!data) {
+            router.push("/404");
+          }
+          break;
+        case "/404":
+          if (data) {
+            router.push("/talas");
+          }
+          break;
+      }
+    }
+  }, [data, isLoading, pathName, router]);
 
-  return children;
+  if (isLoading) {
+    return (
+      <div className={scss.loading__container}>
+        <div className={scss.horse}>
+          <img src={horse1.src} alt="Horse 1" />
+          <img src={horse1.src} alt="Horse 2" />
+          <img src={horse1.src} alt="Horse 3" />
+        </div>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
 };

@@ -78,13 +78,6 @@ const api = index.injectEndpoints({
       }),
       invalidatesTags: ["auth"],
     }),
-    getFavoriteItems: build.query<AUTH.FavoriteItem[], void>({
-      query: () => ({
-        url: "/favorite_item/",
-        method: "GET",
-      }),
-      providesTags: ["favorite"],
-    })
   }),
 });
 export const {
@@ -96,5 +89,4 @@ export const {
   usePatchRefreshTokenMutation,
   usePostResetPasswordMutation,
   usePostForgotPasswordMutation,
-  useGetFavoriteItemsQuery,
 } = api;

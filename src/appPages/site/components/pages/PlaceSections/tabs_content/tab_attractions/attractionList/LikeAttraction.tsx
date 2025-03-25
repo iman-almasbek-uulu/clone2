@@ -5,7 +5,7 @@ import {
   useDeleteFavoriteMutation,
   useGetFavoriteQuery,
   usePostFavoriteMutation,
-} from "@/redux/api/regions";
+} from "@/redux/api/favorite";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetMeQuery } from "@/redux/api/auth";
