@@ -9,8 +9,6 @@ import { useGetHotelsQuery, useGetKitchensQuery } from "@/redux/api/place";
 import { useGetAttractionsQuery } from "@/redux/api/home";
 import { useGetPopularPlacesQuery } from "@/redux/api/regions";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
-
-// Типы для данных на основе структуры API
 interface PopularPlace {
   id: number;
   popular_name: string;
