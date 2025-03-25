@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, ElementRef } from "react";
 import scss from "./VisionProfile.module.scss";
 import Image from "next/image";
 import edit from "@/assets/icons/Edit.svg";
@@ -11,12 +11,9 @@ import useTranslate from "@/appPages/site/hooks/translate/translate";
 import debounce from "lodash/debounce";
 
 interface LocationSuggestion {
-  description: string;
-  place_id: string;
-  structured_formatting: {
-    main_text: string;
-    secondary_text: string;
-  };
+  display_name: string;
+  lat: string;
+  lon: string;
 }
 
 const VisionProfile = () => {
@@ -31,55 +28,13 @@ const VisionProfile = () => {
   const [isManualInput, setIsManualInput] = useState(false);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  const inputRef = useRef<any>(null);
-  const autocompleteService = useRef<any>(null);
-  const placesService = useRef<any>(null);
-  const googleMapsLoaded = useRef(false);
+  const inputRef = useRef<ElementRef<typeof Input>>(null);
 
   const { register, watch } = useForm<AUTH.PatchMeRequest>();
 
-  // Инициализация Google Maps API
-  useEffect(() => {
-    if (googleMapsLoaded.current || typeof window === "undefined") return;
-    const loadGoogleMaps = () => {
-      const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&language=${t("en", "en", "en") }`;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        googleMapsLoaded.current = true;
-        autocompleteService.current = new google.maps.places.AutocompleteService();
-        placesService.current = new google.maps.places.PlacesService(
-          document.createElement("div")
-        );
-      };
-      document.head.appendChild(script);
-    };
-
-    if (!window.google) {
-      loadGoogleMaps();
-    } else {
-      googleMapsLoaded.current = true;
-      autocompleteService.current = new google.maps.places.AutocompleteService();
-      placesService.current = new google.maps.places.PlacesService(
-        document.createElement("div")
-      );
-    }
-
-    return () => {
-      // Очистка при размонтировании
-      const script = document.querySelector(
-        'script[src^="https://maps.googleapis.com/maps/api/js"]'
-      );
-      if (script) {
-        document.head.removeChild(script);
-      }
-    };
-  }, [t]);
-
   const searchLocations = useCallback(
     debounce(async (query: string) => {
-      if (!query.trim() || !autocompleteService.current) {
+      if (!query.trim()) {
         setSuggestions([]);
         return;
       }
@@ -87,30 +42,25 @@ const VisionProfile = () => {
       try {
         setIsSearching(true);
         
-        autocompleteService.current.getPlacePredictions(
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+            query
+          )}&addressdetails=1&limit=5`,
           {
-            input: query,
-            types: ["(regions)"],
-            componentRestrictions: { country: ["ru", "kg", "kz", "uz", "tj", "tm"] },
-          },
-          (predictions: LocationSuggestion[] | null, status: string) => {
-            if (status === "OK" && predictions) {
-              setSuggestions(predictions);
-            } else {
-              setSuggestions([]);
-              if (status !== "ZERO_RESULTS") {
-                message.error(
-                  t(
-                    "Ошибка поиска мест",
-                    "خطأ في البحث عن الأماكن",
-                    "Places search error"
-                  )
-                );
-              }
+            headers: {
+              'User-Agent': 'YourAppName/1.0 (your@email.com)'
             }
-            setIsSearching(false);
           }
         );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setSuggestions(data);
       } catch (error) {
         console.error("Search error:", error);
         message.error(
@@ -121,6 +71,7 @@ const VisionProfile = () => {
           )
         );
         setSuggestions([]);
+      } finally {
         setIsSearching(false);
       }
     }, 500),
@@ -134,43 +85,9 @@ const VisionProfile = () => {
   };
 
   const handleLocationSelect = (location: LocationSuggestion) => {
-    if (!placesService.current) return;
-
-    placesService.current.getDetails(
-      {
-        placeId: location.place_id,
-        fields: ["address_components", "formatted_address", "name"],
-      },
-      (place: any, status: string) => {
-        if (status === "OK") {
-          const country = place.address_components.find((c: any) =>
-            c.types.includes("country")
-          )?.long_name;
-          const city = place.address_components.find((c: any) =>
-            c.types.includes("locality")
-          )?.long_name;
-
-          let locationName = place.formatted_address;
-          if (country && city) {
-            locationName = `${city}, ${country}`;
-          } else if (place.name) {
-            locationName = place.name;
-          }
-
-          setManualLocation(locationName);
-          setSuggestions([]);
-          inputRef.current?.focus();
-        } else {
-          message.error(
-            t(
-              "Ошибка получения деталей места",
-              "خطأ في الحصول على تفاصيل المكان",
-              "Error getting place details"
-            )
-          );
-        }
-      }
-    );
+    setManualLocation(location.display_name);
+    setSuggestions([]);
+    inputRef.current?.focus();
   };
 
   const fetchLocation = async () => {
@@ -191,15 +108,18 @@ const VisionProfile = () => {
       const position = await new Promise<GeolocationPosition>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, {
           timeout: 10000,
-          maximumAge: 60000,
-          enableHighAccuracy: true,
+          maximumAge: 60000
         });
       });
 
       const { latitude, longitude } = position.coords;
-      
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&language=${t("en", "en", "en")}&result_type=locality|country`
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
+        {
+          headers: {
+            'User-Agent': 'YourAppName/1.0 (your@email.com)'
+          }
+        }
       );
 
       if (!response.ok) {
@@ -207,23 +127,14 @@ const VisionProfile = () => {
       }
 
       const data = await response.json();
-      if (data.status !== "OK" || !data.results.length) {
-        throw new Error("No results found");
-      }
-
-      const country = data.results[0].address_components.find((c: any) =>
-        c.types.includes("country")
-      )?.long_name;
-      const city = data.results[0].address_components.find((c: any) =>
-        c.types.includes("locality")
-      )?.long_name;
+      const country = data.address?.country;
+      const city = data.address?.city || data.address?.town || data.address?.village;
 
       if (country && city) {
-        setDetectedLocation(`${city}, ${country}`);
+        setDetectedLocation(`${country}, ${city}`);
         setIsModalOpen(true);
       } else {
-        setDetectedLocation(data.results[0].formatted_address);
-        setIsModalOpen(true);
+        throw new Error("Location data incomplete");
       }
     } catch (error) {
       console.error("Geolocation error:", error);
@@ -460,12 +371,7 @@ const VisionProfile = () => {
                     onClick={() => handleLocationSelect(item)}
                     className={scss.suggestionItem}
                   >
-                    <div>
-                      <div>{item.structured_formatting.main_text}</div>
-                      <div className={scss.secondaryText}>
-                        {item.structured_formatting.secondary_text}
-                      </div>
-                    </div>
+                    {item.display_name}
                   </List.Item>
                 )}
               />
