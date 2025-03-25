@@ -1,5 +1,6 @@
 const nextConfig = {
   images: {
+    
     remotePatterns: [
       {
         protocol: "https",
@@ -18,6 +19,17 @@ const nextConfig = {
         hostname: "*.api.sitetrevel.online",
       },
     ],
+    domains: ['maps.googleapis.com'],
+  },
+  experimental: {
+    modularizeImports: {
+      'lodash': {
+        transform: 'lodash/{{member}}',
+      },
+      'lodash.debounce': {
+        transform: 'lodash.debounce',
+      },
+    },
   },
 };
 
