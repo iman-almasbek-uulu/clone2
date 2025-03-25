@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 25px;
+    // margin-bottom: 25px;
     font-size: clamp(32px, 3vw, 48px);
     font-weight: 700;
     line-height: 42px;
@@ -29,7 +29,7 @@
   h2 {
     font-family: "inter", sans-serif;
     font-size: 18px;
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     text-align: start;
     align-self: flex-start;
     @media (max-width: 768px) {
