@@ -398,7 +398,6 @@ const SignUpPage: FC = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [countryCode, setCountryCode] = useState("+996");
   const [emailError, setEmailError] = useState<string | null>(null);
-  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const {
     control,
