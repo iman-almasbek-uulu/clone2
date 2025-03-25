@@ -99,9 +99,9 @@ const PasswordField: FC<PasswordFieldProps> = ({
 }) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const regex = /^[A-Za-z0-9!@#$%^&*()_+]*$/;
+    const regex = /^[A-Za-z0-9!@#$%^&*_.]*$/;
     if (!regex.test(value)) {
-      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*()_+]/g, "");
+      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*_.]/g, "");
     }
   };
 
@@ -193,10 +193,14 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
         placeholder="Email"
         errors={errors}
       />
-
-      {errors.password && (
-        <span className={scss.error}>{errors.password.message}</span>
-      )}
+      <p>
+        {errors.password && (
+          <span className={scss.error}>{errors.password.message}</span>
+        )}
+        {errors.confirm_password && (
+          <span className={scss.error}>{errors.confirm_password.message}</span>
+        )}
+      </p>
       <PasswordField
         name="password"
         control={control}
@@ -345,29 +349,45 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
         />
       </div>
 
+      <div className={scss.Remember}>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#004a60",
+              colorBorder: "transparent",
+            },
+          }}
+        >
+          <Switch
+            className={scss.customCheckbox}
+            onChange={handleRememberMeChange}
+          />
+        </ConfigProvider>
+        <p>{t("Remember me", "تذكرني", "Remember me")}</p>
+      </div>
       <ConfigProvider
         theme={{
-          token: {
-            colorPrimary: "#407EC7",
-            colorBorder: "#000",
+          components: {
+            Button: {
+              colorPrimary: "#004a60",
+              colorBorder: "transparent",
+              controlOutline: "none",
+              controlItemBgHover: "#004a60",
+              controlItemBgActive: "$004a60",
+            },
           },
         }}
       >
-        <Switch
-          className={scss.customCheckbox}
-          onChange={handleRememberMeChange}
-        />
+        <Button
+          className={scss.submit}
+          type="primary"
+          size="large"
+          block
+          htmlType="submit"
+        >
+          {t("Зарегистрироваться", "تسجيل", "Sign up")}
+        </Button>
       </ConfigProvider>
-
-      <Button
-        className={scss.submit}
-        type="primary"
-        size="large"
-        block
-        htmlType="submit"
-      >
-        {t("Зарегистрироваться", "تسجيل", "Sign up")}
-      </Button>
     </form>
   );
 };
@@ -378,6 +398,7 @@ const SignUpPage: FC = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [countryCode, setCountryCode] = useState("+996");
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const {
     control,
@@ -420,6 +441,7 @@ const SignUpPage: FC = () => {
       if ("data" in response && response.data?.access) {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem("accessToken", JSON.stringify(response.data));
+        window.location.reload();
       } else if ("error" in response) {
         const errorData = response.error as {
           status: number;
@@ -446,6 +468,36 @@ const SignUpPage: FC = () => {
               "This email is already registered"
             )
           );
+        } else if (errorData.status === 400) {
+          // Универсальная обработка ошибок валидации пароля
+          if (
+            errorData.data?.detail?.includes(
+              "Пароль должен содержать хотя бы один специальный символ."
+            )
+          ) {
+            setError("password", {
+              type: "manual",
+              message: t(
+                "Пароль должен содержать хотя бы один специальный символ (!@#$%^&*._)",
+                "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل (!@#$%^&*._)",
+                "Password must contain at least one special character (!@#$%^&*._)"
+              ),
+            });
+          } else if (errorData.data?.detail?.includes("8 символов")) {
+            setError("password", {
+              type: "manual",
+              message: t(
+                "Пароль должен быть не меньше 8 символов",
+                "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+                "Password must be at least 8 characters"
+              ),
+            });
+          }
+
+          // Показываем сообщение об ошибке, которое пришло с сервера
+          if (errorData.data?.detail) {
+            message.error(errorData.data.detail);
+          }
         }
       }
     } catch (error: unknown) {

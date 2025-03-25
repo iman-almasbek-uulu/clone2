@@ -4,7 +4,15 @@ import { usePostLoginMutation } from "@/redux/api/auth";
 import { ConfigProvider, Input, Switch, Button, message } from "antd";
 import Link from "next/link";
 import { FC, useState } from "react";
-import { SubmitHandler, useForm, Controller, Control, UseFormHandleSubmit, RegisterOptions, FieldErrors } from "react-hook-form";
+import {
+  SubmitHandler,
+  useForm,
+  Controller,
+  Control,
+  UseFormHandleSubmit,
+  RegisterOptions,
+  FieldErrors,
+} from "react-hook-form";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 
 interface IFormInput {
@@ -20,12 +28,18 @@ interface InputFieldProps {
   errors: FieldErrors<IFormInput>;
 }
 
-const InputField: FC<InputFieldProps> = ({ name, control, rules, placeholder, errors }) => {
+const InputField: FC<InputFieldProps> = ({
+  name,
+  control,
+  rules,
+  placeholder,
+  errors,
+}) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const regex = /^[A-Za-z0-9@._-]*$/;
     if (!regex.test(value)) {
-      e.target.value = value.replace(/[^A-Za-z0-9@._-]/g, '');
+      e.target.value = value.replace(/[^A-Za-z0-9@._-]/g, "");
     }
   };
 
@@ -58,12 +72,18 @@ interface PasswordFieldProps {
   errors: FieldErrors<IFormInput>;
 }
 
-const PasswordField: FC<PasswordFieldProps> = ({ name, control, rules, placeholder, errors }) => {
+const PasswordField: FC<PasswordFieldProps> = ({
+  name,
+  control,
+  rules,
+  placeholder,
+  errors,
+}) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const regex = /^[A-Za-z0-9!@#$%^&*()_+]*$/;
+    const regex = /^[A-Za-z0-9!@#$%^&*_.]*$/;
     if (!regex.test(value)) {
-      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*()_+]/g, '');
+      e.target.value = value.replace(/[^A-Za-z0-9!@#$%^&*_.]/g, "");
     }
   };
 
@@ -126,15 +146,28 @@ const LoginForm: FC<LoginFormProps> = ({
       {loginError && (
         <p className={scss.loginError}>
           <span>
-          {t("Логин или пароль не верный", "اسم المستخدم أو كلمة المرور غير صحيحة", "Incorrect login or password")}</span>
+            {t(
+              "Логин или пароль не верный",
+              "اسم المستخدم أو كلمة المرور غير صحيحة",
+              "Incorrect login or password"
+            )}
+          </span>
         </p>
       )}
-      
-      {errors.email && <span className={scss.error}>{errors.email.message}</span>}
+
+      {errors.email && (
+        <span className={scss.error}>{errors.email.message}</span>
+      )}
       <InputField
         name="email"
         control={control}
-        rules={{ required: t("Email обязателен", "البريد الإلكتروني مطلوب", "Email is required") }}
+        rules={{
+          required: t(
+            "Email обязателен",
+            "البريد الإلكتروني مطلوب",
+            "Email is required"
+          ),
+        }}
         placeholder={t("Email", "البريد الإلكتروني", "Email")}
         errors={errors}
       />
@@ -145,7 +178,13 @@ const LoginForm: FC<LoginFormProps> = ({
       <PasswordField
         name="password"
         control={control}
-        rules={{ required: t("Пароль обязателен", "كلمة المرور مطلوبة", "Password is required") }}
+        rules={{
+          required: t(
+            "Пароль обязателен",
+            "كلمة المرور مطلوبة",
+            "Password is required"
+          ),
+        }}
         placeholder={t("Пароль", "كلمة المرور", "Password")}
         errors={errors}
       />
@@ -155,8 +194,8 @@ const LoginForm: FC<LoginFormProps> = ({
           <ConfigProvider
             theme={{
               token: {
-                colorPrimary: "#407EC7",
-                colorBorder: "#000",
+                colorPrimary: "#004a60",
+                colorBorder: "transparent",
               },
             }}
           >
@@ -202,10 +241,10 @@ const SignInPage: FC = () => {
       email: userData.email,
       password: userData.password,
     };
-    
+
     try {
       const response = await postLoginMutation(datalogin);
-      
+
       if ("data" in response && response.data?.access) {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem("accessToken", JSON.stringify(response.data));
@@ -213,12 +252,24 @@ const SignInPage: FC = () => {
       } else if ("error" in response) {
         // Обработка ошибки авторизации
         setLoginError("Логин или пароль не верный");
-        message.error(t("Логин или пароль не верный", "اسم المستخدم أو كلمة المرور غير صحيحة", "Incorrect login or password"));
+        message.error(
+          t(
+            "Логин или пароль не верный",
+            "اسم المستخدم أو كلمة المرور غير صحيحة",
+            "Incorrect login or password"
+          )
+        );
       }
     } catch (e) {
       console.error("An error occurred:", e);
       setLoginError("Логин или пароль не верный");
-      message.error(t("Логин или пароль не верный", "اسم المستخدم أو كلمة المرور غير صحيحة", "Incorrect login or password"));
+      message.error(
+        t(
+          "Логин или пароль не верный",
+          "اسم المستخدم أو كلمة المرور غير صحيحة",
+          "Incorrect login or password"
+        )
+      );
     }
   };
 
@@ -228,8 +279,16 @@ const SignInPage: FC = () => {
 
   return (
     <section className={scss.LoginPage}>
-      <h1 className={scss.authTitle}>{t("Sign in", "تسجيل الدخول", "Sign in")}</h1>
-      <h2>{t("Войдите в аккаунт", "قم بتسجيل الدخول إلى حسابك", "Sign in to your account")}</h2>
+      <h1 className={scss.authTitle}>
+        {t("Sign in", "تسجيل الدخول", "Sign in")}
+      </h1>
+      <h2>
+        {t(
+          "Войдите в аккаунт",
+          "قم بتسجيل الدخول إلى حسابك",
+          "Sign in to your account"
+        )}
+      </h2>
       <LoginForm
         handleSubmit={handleSubmit}
         control={control}
@@ -239,7 +298,9 @@ const SignInPage: FC = () => {
         loginError={loginError || undefined}
       />
       <div className={scss.nav}>
-        <p>{t("У вас нет аккаунта?", "ليس لديك حساب؟", "Don't have an account?")}</p>
+        <p>
+          {t("У вас нет аккаунта?", "ليس لديك حساب؟", "Don't have an account?")}
+        </p>
         <Link href="/auth/sign-up" className={scss.link}>
           {t("Зарегестрироваться", "التسجيل", "Sign up")}
         </Link>
