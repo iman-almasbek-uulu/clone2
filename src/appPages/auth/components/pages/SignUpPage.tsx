@@ -148,7 +148,6 @@ interface RegistrationFormProps {
   handleRememberMeChange: (checked: boolean) => void;
   onSubmit: SubmitHandler<IFormInput>;
   handleCountryCodeChange: (value: string) => void;
-  emailError?: string;
 }
 
 const RegistrationForm: FC<RegistrationFormProps> = ({
@@ -159,7 +158,6 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   handleRememberMeChange,
   onSubmit,
   handleCountryCodeChange,
-  emailError,
 }) => {
   const { t } = useTranslate();
 
@@ -397,7 +395,6 @@ const SignUpPage: FC = () => {
   const [postRegisterMutation] = usePostRegistrationMutation();
   const [rememberMe, setRememberMe] = useState(false);
   const [countryCode, setCountryCode] = useState("+996");
-  const [emailError, setEmailError] = useState<string | null>(null);
 
   const {
     control,
@@ -432,10 +429,6 @@ const SignUpPage: FC = () => {
 
     try {
       const response = await postRegisterMutation(dataRegistr);
-      console.log(
-        "🚀 ~ constonSubmit:SubmitHandler<IFormInput>= ~ response:",
-        response
-      );
 
       if ("data" in response && response.data?.access) {
         const storage = rememberMe ? localStorage : sessionStorage;
@@ -451,7 +444,6 @@ const SignUpPage: FC = () => {
           errorData.status === 400 &&
           errorData.data?.detail === "user with this email already exists."
         ) {
-          setEmailError("Данный email уже зарегистрирован");
           setError("email", {
             type: "manual",
             message: t(
@@ -468,7 +460,6 @@ const SignUpPage: FC = () => {
             )
           );
         } else if (errorData.status === 400) {
-          // Универсальная обработка ошибок валидации пароля
           if (
             errorData.data?.detail?.includes(
               "Пароль должен содержать хотя бы один специальный символ."
@@ -493,7 +484,6 @@ const SignUpPage: FC = () => {
             });
           }
 
-          // Показываем сообщение об ошибке, которое пришло с сервера
           if (errorData.data?.detail) {
             message.error(errorData.data.detail);
           }
@@ -503,6 +493,7 @@ const SignUpPage: FC = () => {
       console.error("An error occurred:", error);
     }
   };
+
   const handleRememberMeChange = (checked: boolean) => {
     setRememberMe(checked);
   };
@@ -525,7 +516,6 @@ const SignUpPage: FC = () => {
         handleRememberMeChange={handleRememberMeChange}
         onSubmit={onSubmit}
         handleCountryCodeChange={handleCountryCodeChange}
-        emailError={emailError || undefined}
       />
       <div className={scss.links}>
         <p>
