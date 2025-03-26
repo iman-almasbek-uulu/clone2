@@ -2,9 +2,11 @@ import { Avatar, Badge, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import scss from "./User.module.scss";
 import { useGetMeQuery } from "@/redux/api/auth";
+// import { useNotifications } from "@/providers/NotificationProvider";
 
 const User = () => {
   const { data: user } = useGetMeQuery();
+  // const { unreadCount } = useNotifications();
 
   return (
     <section className={scss.User}>
@@ -23,7 +25,7 @@ const User = () => {
           user.map((el, index) => (
             <Space direction="vertical" size={20} key={el.id || index}>
               <Space wrap size={20}>
-                <Badge count={1}>
+                <Badge count={1} showZero={false}>
                   <Avatar
                     size={47}
                     icon={

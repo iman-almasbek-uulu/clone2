@@ -1,5 +1,6 @@
 "use client";
 import LoadScriptPrviders from "@/providers/LoadScriptPrviders";
+// import { NotificationProvider } from "@/providers/NotificationProvider";
 // import ProtectProvider from "@/providers/ProtectProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { RegionProvider } from "@/providers/RegionProvider";
@@ -16,15 +17,18 @@ const RootLayoutClient: FC<RootLayoutClientProps> = ({ children }) => {
   return (
     <>
       {/* <BrowserRouter> */}
-        <ReduxProvider>
-          <SessionProvider>
+
+      <ReduxProvider>
+        <SessionProvider>
+          {/* <NotificationProvider> */}
             {/* <ProtectProvider> */}
             <LoadScriptPrviders>
               <RegionProvider>{children}</RegionProvider>
             </LoadScriptPrviders>
             {/* </ProtectProvider> */}
-          </SessionProvider>
-        </ReduxProvider>
+          {/* </NotificationProvider> */}
+        </SessionProvider>
+      </ReduxProvider>
       {/* </BrowserRouter> */}
     </>
   );

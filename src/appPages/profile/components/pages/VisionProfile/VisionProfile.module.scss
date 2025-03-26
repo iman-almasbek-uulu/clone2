@@ -1,19 +1,23 @@
 .VisionProfile {
   width: 100%;
   height: 100%;
+
   .content {
     position: relative;
     width: 100%;
     height: clamp(87px, 19vw, 253px);
+    margin-bottom: 20px;
+
     .cover {
       padding: 20px;
       position: relative;
       border-radius: 10px 10px 0 0;
       width: 100%;
       height: clamp(64px, 15vw, 203px);
-      background-color: gray;
+      background-color: #f0f0f0;
+
       label.EditCover {
-      font-size: clamp(5px, 2vw, 14px);
+        font-size: clamp(5px, 2vw, 14px);
         position: absolute;
         border-radius: 10px;
         top: 10px;
@@ -21,11 +25,17 @@
         background-color: var(--background);
         color: var(--main-color);
         border: none;
-        padding: 5px;
+        padding: 5px 10px;
         z-index: 5;
         cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          opacity: 0.9;
+        }
       }
     }
+
     .EditImage {
       position: absolute;
       bottom: clamp(5px, 2vw, 25px);
@@ -34,30 +44,42 @@
       display: flex;
       align-items: flex-end;
       gap: 10px;
+
       .avatar {
         width: clamp(42px, 8vw, 120px);
         height: clamp(42px, 8vw, 120px);
         object-fit: cover;
-        box-shadow: 4px 4px 2px 2px #0000004d;
+        box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
         cursor: pointer;
+        border: 2px solid white;
+
         img {
+          width: 100%;
           height: 100%;
+          object-fit: cover;
         }
       }
+
       .userName {
         display: flex;
         flex-direction: column;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+
         h1 {
           font-size: clamp(14px, 2vw, 24px);
-          color: var(--background);
-          font-weight: 400;
+          font-weight: 600;
+          margin: 0;
         }
+
         p {
           font-size: clamp(10px, 2vw, 14px);
-          color: var(--background);
+          margin: 0;
+          opacity: 0.9;
         }
       }
     }
+
     button.EditFrom {
       position: absolute;
       border: none;
@@ -66,11 +88,80 @@
       background-color: transparent;
       bottom: 10px;
       right: 10px;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       img {
-        width: clamp(9px, 3vw, 25px);
-        height: clamp(9px, 3vw, 25px);
-      
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
       }
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .locationSearchContainer {
+    position: relative;
+    margin-top: 15px;
+
+    .ant-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+  }
+
+  .suggestionsList {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    .ant-list-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+
+  .secondaryText {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  .noResults {
+    color: #ff4d4f;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .detectedLocation {
+    text-align: center;
+    padding: 10px;
+
+    p:first-child {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    p:last-child {
+      color: #666;
     }
   }
 }
