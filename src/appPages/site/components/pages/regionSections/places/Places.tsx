@@ -1,7 +1,6 @@
 "use client";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import scss from "./Places.module.scss";
-import imgRight from "@/assets/images/regions/Arrow_alt_lright.png";
 import Link from "next/link";
 import { useGetRegionListQuery } from "@/redux/api/regions";
 import { usePathname } from "next/navigation";

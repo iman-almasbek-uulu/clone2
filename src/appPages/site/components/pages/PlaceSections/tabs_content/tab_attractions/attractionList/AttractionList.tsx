@@ -10,23 +10,24 @@ import { HOME } from "@/redux/api/home/types";
 interface AttractionsProps {
   isCurrent: number | null;
   setIsCurrent: (id: number | null) => void;
-  attractionsInPlace: HOME.AttractionsResponse
+  attractionsInPlace: HOME.AttractionsResponse;
 }
 
 const ITEMS_PER_PAGE = 4;
 
-const AttractionList: FC<AttractionsProps> = ({ setIsCurrent, isCurrent, attractionsInPlace }) => {
+const AttractionList: FC<AttractionsProps> = ({
+  setIsCurrent,
+  isCurrent,
+  attractionsInPlace,
+}) => {
   const { t } = useTranslate();
   const [isLimit, setIsLimit] = useState<number>(1);
   const [imgErrors, setImgErrors] = useState<{ [key: number]: boolean }>({});
-
 
   // Handle image error for specific attraction
   const handleImageError = (id: number) => {
     setImgErrors((prev) => ({ ...prev, [id]: true }));
   };
-
-
 
   // Пагинация
   const paginateArray = <T,>(arr: T[], pageSize: number): T[][] => {
@@ -38,8 +39,6 @@ const AttractionList: FC<AttractionsProps> = ({ setIsCurrent, isCurrent, attract
       [] as T[][]
     );
   };
-
-
 
   // Рендерим элементы списка
   const renderAttractionItem = attractionsInPlace.map((el, i) => (
@@ -106,7 +105,19 @@ const AttractionList: FC<AttractionsProps> = ({ setIsCurrent, isCurrent, attract
         )}
       </div>
       {dividedArray.slice(0, isLimit).map((item, index) => (
-        <div key={index} className={scss.list}>
+        <div
+          key={index}
+          style={
+            dividedArray.slice(0, isLimit).length < 4
+              ? {
+                  gridTemplateColumns: `repeat(${
+                    dividedArray.slice(0, isLimit).length
+                  }, 280px)`,
+                }
+              : {}
+          }
+          className={scss.list}
+        >
           {item}
         </div>
       ))}

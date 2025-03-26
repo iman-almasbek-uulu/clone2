@@ -8,6 +8,7 @@ namespace PLACE {
     popular_reviews: unknown[]; // заменил any на unknown
     latitude: string;
     longitude: string;
+    attraction_len: number;
   };
 
   export type PlaceRequest = number;
@@ -140,6 +141,7 @@ namespace PLACE {
     price_medium_period: number;
     price_long_period: number;
     hotel_reviews: HotelReview[];
+    contact: number
   };
 
   export type HotelIDRequest = number | null;
