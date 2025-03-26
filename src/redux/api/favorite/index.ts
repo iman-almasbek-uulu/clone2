@@ -1,4 +1,5 @@
 import { api as index } from "..";
+import { FAVORITE } from "./types";
 
 const api = index.injectEndpoints({
   endpoints: (build) => ({
@@ -25,7 +26,7 @@ const api = index.injectEndpoints({
     }),
     DeleteFavorite: build.mutation<
       FAVORITE.DeleteFavoriteResponse,
-      FAVORITE.DeleteteFavoriteRequest
+      FAVORITE.DeleteFavoriteRequest // Исправлено с DeleteteFavoriteRequest на DeleteFavoriteRequest
     >({
       query: (data) => ({
         url: `/favorites/${data.id}/`,
