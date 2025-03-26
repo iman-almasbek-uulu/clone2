@@ -3,11 +3,7 @@ import React from "react";
 import { useGetMeQuery } from "@/redux/api/auth";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import scss from "./Favorites.module.scss";
-import Stars from "@/appPages/site/ui/stars/Stars";
-import {
-  useDeleteFavoriteMutation,
-  useGetFavoriteQuery,
-} from "@/redux/api/regions";
+import Stars from "@/appPages/site/ui/stars/Stars"
 import { FaHeart } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import SearchProfile from "../SearchProfile/SearchProfile";
@@ -16,6 +12,7 @@ import { Avatar, Space } from "antd";
 import BurgerMenu from "@/appPages/site/ui/BurgerMenu/BurgerMenu";
 import { UserOutlined } from "@ant-design/icons";
 import Image from "next/image";
+import { useDeleteFavoriteMutation, useGetFavoriteQuery } from "@/redux/api/favorite";
 
 const Favorites = () => {
   const { t } = useTranslate();
