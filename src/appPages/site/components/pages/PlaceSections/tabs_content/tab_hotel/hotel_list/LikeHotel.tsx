@@ -1,23 +1,21 @@
 import React, { FC, useState, useEffect } from "react";
 import scss from "./LikeHotel.module.scss";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import {
-  useDeleteFavoriteMutation,
-  useGetFavoriteQuery,
-  usePostFavoriteMutation,
-} from "@/redux/api/regions";
 import { useGetMeQuery } from "@/redux/api/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
-
+import {
+  useDeleteFavoriteMutation,
+  useGetFavoriteQuery,
+  usePostFavoriteMutation,
+} from "@/redux/api/favorite";
 interface LikePostProps {
   postId: number;
   hotel?: boolean;
-
 }
 
-const LikeHotel: FC<LikePostProps> = ({ postId,  hotel = false  }) => {
+const LikeHotel: FC<LikePostProps> = ({ postId, hotel = false }) => {
   const { data: user } = useGetMeQuery();
   const [postFavorite] = usePostFavoriteMutation();
   const [deleteFavorite] = useDeleteFavoriteMutation();
@@ -55,10 +53,21 @@ const LikeHotel: FC<LikePostProps> = ({ postId,  hotel = false  }) => {
   };
 
   if (hotel) {
-    return <>
-      {isLiked ? <HeartFilled onClick={toggleLike} style={{ color: "red", fontSize: "clamp(20px,3vw,35px)"}}   /> : <HeartOutlined onClick={toggleLike} style={{ fontSize: "clamp(20px,3vw,35px)"}} />}
-      
-    </>;
+    return (
+      <>
+        {isLiked ? (
+          <HeartFilled
+            onClick={toggleLike}
+            style={{ color: "red", fontSize: "clamp(20px,3vw,35px)" }}
+          />
+        ) : (
+          <HeartOutlined
+            onClick={toggleLike}
+            style={{ fontSize: "clamp(20px,3vw,35px)" }}
+          />
+        )}
+      </>
+    );
   }
 
   return (

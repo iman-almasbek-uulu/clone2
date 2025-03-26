@@ -240,6 +240,7 @@ const KitchenHistory = () => {
                                   height={47}
                                   style={{
                                     objectFit: "cover",
+                                    height: "100%",
                                   }}
                                   unoptimized={true}
                                   onError={(e: React.SyntheticEvent<HTMLImageElement>) => handleImageError(e)}

@@ -1,14 +1,14 @@
 import React, { FC, useState, useEffect } from "react";
 import scss from "./LikePost.module.scss";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useGetMeQuery } from "@/redux/api/auth";
 import {
   useDeleteFavoriteMutation,
   useGetFavoriteQuery,
   usePostFavoriteMutation,
-} from "@/redux/api/regions";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useGetMeQuery } from "@/redux/api/auth";
+} from "@/redux/api/favorite";
 
 interface LikePostProps {
   postId: number;

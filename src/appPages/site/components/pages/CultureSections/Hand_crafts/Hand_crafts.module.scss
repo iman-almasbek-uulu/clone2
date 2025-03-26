@@ -1,166 +1,205 @@
 .section {
-    padding: 40px ;
-    @media (max-width: 428px) {
-      padding: 0;
+  padding: 40px;
+  @media (max-width: 428px) {
+    padding: 0;
+  }
+  .top {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 50px;
+    background-image: url("../../../../../../assets/images/cultureImages/bg.jpg");
+    background-position: center;
+    backdrop-filter: blur(10px);
+    @media (max-width: 500px) {
+      position: absolute;
+      width: 100%;
+      height: 151px;
+      top: 80px;
+      left: 0;
+      justify-content: center;
     }
-    .top {
-      height: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-inline: 50px;
-      background-image: url("../../../../../../assets/images/cultureImages/bg.jpg");
-      background-position: center;
+    .muted-background {
+      background-color: rgba(195, 185, 185, 0.639);
       backdrop-filter: blur(10px);
-      @media (max-width: 500px) {
-        position: absolute;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+    .top-heading {
+      color: #004a60;
+      font-family: Abril Fatface;
+      font-size: clamp(28px, 5vw, 56px);
+      font-weight: 400;
+      line-height: clamp(28px, 5vw, 86.34px);
+      max-width: 345px;
+    }
+    .top-paragraph {
+      color: #000;
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: clamp(12px, 5vw, 24px);
+      font-weight: 500;
+      line-height: clamp(12px, 5vw, 30.98px);
+      width: 707px;
+      text-align: center;
+    }
+  }
+  .main {
+    padding-top: 60px;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    @media (max-width: 835px) {
+      flex-direction: column;
+    }
+    @media (max-width: 500px) {
+      padding-top: 130px;
+    }
+    @media (max-width: 428px) {
+      padding-top: 170px;
+    }
+    img {
+      width: 574px;
+      height: 392px;
+      @media (max-width: 1043px) {
+        width: 500px;
+      }
+      @media (max-width: 1043px) {
+        width: 500px;
+      }
+      @media (max-width: 1034px) {
+        width: 450px;
+        height: auto;
+      }
+      @media (max-width: 884px) {
+        width: 400px;
+      }
+      @media (max-width: 835px) {
         width: 100%;
-        height: 151px;
-        top: 80px;
-        left: 0;
-        justify-content: center;
-      }
-      .muted-background {
-        background-color: rgba(195, 185, 185, 0.639);
-        backdrop-filter: blur(10px);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-      }
-      .top-heading {
-        color: #004a60;
-        font-family: Abril Fatface;
-        font-size: clamp(28px, 5vw, 56px);
-        font-weight: 400;
-        line-height: clamp(28px, 5vw, 86.34px);
-        max-width: 345px;
-      }
-      .top-paragraph {
-        color: #000;
-        font-family: "Frank Ruhl Libre", serif;
-        font-size: clamp(12px, 5vw, 24px);
-        font-weight: 500;
-        line-height: clamp(12px, 5vw, 30.98px);
-        width: 707px;
-        text-align: center;
       }
     }
-    .main {
-      padding-top: 60px;
+    .main-text {
       display: flex;
-      align-items: flex-start;
-      gap: 30px;
-      @media (max-width: 835px) {
-        flex-direction: column;
+      flex-direction: column;
+      gap: 20px;
+      @media (max-width: 884px) {
+        gap: 9px;
       }
-      @media (max-width: 500px) {
-        padding-top: 130px;
+      .main-heading {
+        font-size: clamp(17px, 5vw, 24px);
+        font-weight: 700;
+        line-height: 26px;
       }
-      @media (max-width: 428px) {
-        padding-top: 170px;
-      }
-      img {
-        width: 574px;
-        height: 392px;
-        @media (max-width: 1043px) {
-          width: 500px;
-        }
-        @media (max-width: 1043px) {
-          width: 500px;
+      .main-paragraph {
+        max-width: 553px;
+        font-size: clamp(12px, 5vw, 20px);
+        font-weight: 400;
+        @media (max-width: 1122px) {
+          font-size: 18px;
         }
         @media (max-width: 1034px) {
-          width: 450px;
-          height: auto;
-        }
-        @media (max-width: 884px) {
-          width: 400px;
+          font-size: 15px;
         }
         @media (max-width: 835px) {
-          width: 100%;
-        }
-      }
-      .main-text {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        @media (max-width: 884px) {
-          gap: 9px;
-        }
-        .main-heading {
-          font-size: clamp(17px, 5vw, 24px);
-          font-weight: 700;
-          line-height: 26px;
-        }
-        .main-paragraph {
-          max-width: 553px;
-          font-size: clamp(12px, 5vw, 20px);
-          font-weight: 400;
-          @media (max-width: 1122px) {
-            font-size: 18px;
-          }
-          @media (max-width: 1034px) {
-            font-size: 15px;
-          }
-          @media (max-width: 835px) {
-            max-width: 100%;
-          }
+          max-width: 100%;
         }
       }
     }
   }
-  
-  @media (max-width: 814px) {
-    .section {
-      .top {
-        gap: 40px;
-        padding: 0 30px;
-        .top-paragraph {
-          font-size: 18px;
-          line-height: 26.98px;
-        }
+}
+.loading__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f3f3f3;
+}
+
+.horse {
+  display: flex;
+  gap: 5px;
+}
+
+.horse img {
+  width: 120px;
+  height: auto;
+  animation: run 1s infinite linear;
+}
+
+.horse img:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.horse img:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes run {
+  0% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 0.5;
+  }
+}
+@media (max-width: 814px) {
+  .section {
+    .top {
+      gap: 40px;
+      padding: 0 30px;
+      .top-paragraph {
+        font-size: 18px;
+        line-height: 26.98px;
       }
     }
   }
-  @media (max-width: 613px) {
-    .section {
-      .top {
-        gap: 20px;
-        .top-paragraph {
-          line-height: 24.98px;
-        }
+}
+@media (max-width: 613px) {
+  .section {
+    .top {
+      gap: 20px;
+      .top-paragraph {
+        line-height: 24.98px;
       }
     }
   }
-  @media (max-width: 543px) {
-    .section {
-      .top {
-        .top-paragraph {
-          line-height: 21.98px;
-          font-size: 12px;
-        }
+}
+@media (max-width: 543px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 21.98px;
+        font-size: 12px;
       }
     }
   }
-  @media (max-width: 428px) {
-    .section {
-      .top {
-        .top-paragraph {
-          line-height: 15.49px;
-        }
+}
+@media (max-width: 428px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 15.49px;
       }
     }
   }
-  
-  @media (max-width: 366px) {
-    .section {
-      .top {
-        .top-paragraph {
-          line-height: 10.98px;
-          font-size: 10px;
-        }
+}
+
+@media (max-width: 366px) {
+  .section {
+    .top {
+      .top-paragraph {
+        line-height: 10.98px;
+        font-size: 10px;
       }
     }
   }
+}

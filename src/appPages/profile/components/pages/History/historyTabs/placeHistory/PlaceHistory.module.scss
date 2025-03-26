@@ -4,6 +4,7 @@
   width: 100%;
   max-height: 100vh;
   overflow-y: auto; /* Enable vertical scrolling for the entire component */
+  padding-left: 10px;
   
   /* Improved scrollbar styling for vertical scroll */
   &::-webkit-scrollbar {
@@ -21,7 +22,7 @@
 
 .list {
   display: flex;
-  overflow-x: auto;
+  // overflow-x: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   gap: 16px;

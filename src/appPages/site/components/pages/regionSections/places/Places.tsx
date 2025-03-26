@@ -28,7 +28,7 @@ const Places = () => {
         <div className={scss.list}>
           {popularPlacesInRegion?.popular_places?.map((place, i) => {
             return (
-              <div key={i} className={scss.item}>
+              <Link href={`/${routeName}/${place.id}`} key={i} className={scss.item}>
                 <Image 
                   src={place.popular_image} 
                   alt={place.popular_name || "Popular place"}
@@ -49,16 +49,8 @@ const Places = () => {
                   </div>
                 </div>
                 <LikePost postId={place.id} />
-                <Link href={`/${routeName}/${place.id}`}>
-                  <Image 
-                    className={scss.right} 
-                    src={imgRight.src} 
-                    alt={t("Подробнее", "المزيد", "More details")}
-                    width={24}
-                    height={24}
-                  />
-                </Link>
-              </div>
+                
+              </Link>
             );
           })}
         </div>
