@@ -4,7 +4,6 @@ import scss from "./HotelHistory.module.scss";
 import Image from "next/image";
 import Stars from "@/appPages/site/ui/stars/Stars";
 import imgHeart from "@/assets/images/placeImages/Vector.png";
-import imgRight from "@/assets/images/placeImages/Arrow_alt_lright.png";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import { useGetMeReviewsQuery } from "@/redux/api/profileHistory";
 import { MY_REVIEWS } from "@/redux/api/profileHistory/types";
@@ -168,11 +167,7 @@ const HotelHistory = () => {
                   width={341}
                   height={270}
                   onError={() => handleImageError(hotelImageId)}
-                  style={{ 
-                    width: '100%', 
-                    height: 'auto', 
-                    objectFit: 'cover'
-                  }}
+                  
                 />
               )}
               <div className={scss.block}>
@@ -196,20 +191,7 @@ const HotelHistory = () => {
                   onError={() => handleImageError(`heart-${hotel.id}`)}
                 />
               )}
-              <button>
-                {imageError[`right-${hotel.id}`] ? (
-                  <div className={scss.rightFallback}>→</div>
-                ) : (
-                  <Image
-                    className={scss.right}
-                    src={imgRight.src}
-                    alt="select"
-                    width={24}
-                    height={24}
-                    onError={() => handleImageError(`right-${hotel.id}`)}
-                  />
-                )}
-              </button>
+              
             </div>
           );
         })}

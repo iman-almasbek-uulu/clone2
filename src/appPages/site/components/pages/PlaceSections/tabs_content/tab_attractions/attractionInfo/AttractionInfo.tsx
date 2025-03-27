@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
 import styles from "./AttractionInfo.module.scss";
-import { useGetAttractionIDQuery } from "@/redux/api/place";
+import { useGetAttractionIDQuery, useGetPlaceQuery } from "@/redux/api/place";
 import { ImageOff, Loader } from "lucide-react";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 interface AttractionInfoProps {
   isCurrent: number | null;
@@ -11,6 +12,9 @@ interface AttractionInfoProps {
 
 const AttractionInfo: FC<AttractionInfoProps> = ({ isCurrent }) => {
   const { t } = useTranslate();
+  const pathName = usePathname();
+  const id: number = Number(pathName.split("/")[2]);
+  const { data: attraction_len } = useGetPlaceQuery(id);
   const { data, isLoading, isError } = useGetAttractionIDQuery(isCurrent, {
     skip: isCurrent === null, // Пропускаем запрос, если isCurrent null
   });
@@ -117,17 +121,15 @@ const AttractionInfo: FC<AttractionInfoProps> = ({ isCurrent }) => {
         <div className={styles.textContainer}>
           <p className={styles.description}>{data.description}</p>
           <ul className={styles.list}>
-            <li>
-              {data.type_attraction}
-            </li>
+            <li>{data.type_attraction}</li>
             <li>
               {t("Топ", "أعلى", "Top")} {data.rank}{" "}
               {t(
-                "из 20 развлечений в",
-                "من 20 وسيلة ترفيهية في",
-                "of 20 entertainment in"
+                `из ${attraction_len?.attraction_len} развлечений в`,
+                `من ${attraction_len?.attraction_len} وسيلة ترفيهية في`,
+                `of ${attraction_len?.attraction_len} entertainment in`
               )}{" "}
-              {"Cholpon-Ata"}
+              {attraction_len?.popular_name}
             </li>
           </ul>
         </div>

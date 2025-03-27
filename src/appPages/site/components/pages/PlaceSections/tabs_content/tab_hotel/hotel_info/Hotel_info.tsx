@@ -12,6 +12,7 @@ import { BathIcon, Bed, CarFront } from "lucide-react";
 import { MdOutlinePets } from "react-icons/md";
 import Image from "next/image";
 import LikeHotel from "../hotel_list/LikeHotel";
+import Link from "next/link";
 
 interface propsType {
   isCurrent: number | null;
@@ -182,7 +183,7 @@ const Hotel_info: FC<propsType> = ({ isCurrent }) => {
                 {data?.price_long_period}
               </li>
             </ul>
-            <button> {t("Позвонить сейчас", "اتصل الآن", "Call Now")}</button>
+            <Link className={scss.call} style={{width: "100%", height: '60px'}} href={"tel:+996701893489"}> {t("Позвонить сейчас", "اتصل الآن", "Call Now")}</Link>
           </div>
         </div>
       </div>

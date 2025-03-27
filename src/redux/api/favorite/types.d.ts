@@ -1,5 +1,6 @@
-namespace FAVORITE {
-  type FavoriteResponse = {
+// Используем export для экспорта типов из namespace
+export namespace FAVORITE {
+  export type FavoriteResponse = {
     id: number;
     attractions?: number;
     popular_place?: number;
@@ -9,7 +10,7 @@ namespace FAVORITE {
     created_date: string;
   };
 
-  type FavoriteRequest = {
+  export type FavoriteRequest = {
     attractions?: number;
     popular_place?: number;
     kitchen?: number;
@@ -17,7 +18,7 @@ namespace FAVORITE {
     like: boolean;
   };
 
-  type AttractionList = {
+  export type AttractionList = {
     id: number;
     attraction_name: string;
     region_category: string;
@@ -28,7 +29,7 @@ namespace FAVORITE {
     rating_count?: number;
   };
 
-  type PopularPlacesList = {
+  export type PopularPlacesList = {
     id: number;
     popular_name: string;
     popular_image?: string;
@@ -38,7 +39,7 @@ namespace FAVORITE {
     address?: string;
   };
 
-  type KitchenList = {
+  export type KitchenList = {
     id: number;
     kitchen_name: string;
     price: number;
@@ -50,7 +51,7 @@ namespace FAVORITE {
     main_image?: string;
   };
 
-  type HotelsList = {
+  export type HotelsList = {
     id: number;
     name: string;
     main_image?: string;
@@ -62,7 +63,7 @@ namespace FAVORITE {
     longitude?: number;
   };
 
-  type GetFavoriteResponse = {
+  export type GetFavoriteResponse = {
     id: number;
     user: number;
     attractions?: AttractionList;
@@ -73,10 +74,10 @@ namespace FAVORITE {
     created_date?: string;
   }[];
 
-  type GetFavoriteRequest = void;
+  export type GetFavoriteRequest = void;
 
-  type DeleteFavoriteResponse = void;
-  type DeleteteFavoriteRequest = {
+  export type DeleteFavoriteResponse = void;
+  export type DeleteFavoriteRequest = { // Исправлено опечатку в имени типа "Deletete" -> "Delete"
     id: number;
   };
 }

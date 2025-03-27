@@ -3,6 +3,7 @@ import { api } from "./api";
 import translateSlice from "./translate/translateSlice";
 import { weatherApi } from "./weatherApi";
 import { directionsApi } from "./googleMapsApi";
+
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
@@ -14,7 +15,7 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(api.middleware)
       .concat(weatherApi.middleware)
-      .concat(directionsApi.middleware),
+      .concat(directionsApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

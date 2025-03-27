@@ -1,294 +1,216 @@
-"use client";
-import React from "react";
-import { useGetMeQuery } from "@/redux/api/auth";
-import useTranslate from "@/appPages/site/hooks/translate/translate";
-import scss from "./Favorites.module.scss";
-import Stars from "@/appPages/site/ui/stars/Stars";
-import { FaHeart } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import SearchProfile from "../SearchProfile/SearchProfile";
-import User from "../User/User";
-import { Avatar, Space } from "antd";
-import BurgerMenu from "@/appPages/site/ui/BurgerMenu/BurgerMenu";
-import { UserOutlined } from "@ant-design/icons";
-import Image from "next/image";
-import {
-  useDeleteFavoriteMutation,
-  useGetFavoriteQuery,
-} from "@/redux/api/favorite";
-
-const Favorites = () => {
-  const { t } = useTranslate();
-  const { data } = useGetFavoriteQuery();
-  const { data: user } = useGetMeQuery();
-  const [deleteFavorite] = useDeleteFavoriteMutation();
-
-  const handleDeleteFavorite = async (placeId: number) => {
-    try {
-      await deleteFavorite({ id: placeId });
-    } catch (error) {
-      console.error("Error:", error);
+#Favorites {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  .headerMobile {
+    display: none;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    justify-content: flex-end;
+    background: url("../../../../../assets/images/footerImages/footer.jpg");
+    padding: 5px clamp(30px, 5vw, 83px) 5px clamp(30px, 5vw, 63px);
+    gap: 10px;
+    
+    .logo {
+      margin-right: auto;
     }
-  };
-
-  // Функция для обработки ошибок загрузки изображений
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {
-    const target = e.target as HTMLImageElement;
-    target.src =
-      "https://placehold.co/600x400/e0e0e0/969696?text=Image+Not+Found";
-    target.alt = "Image not available";
-  };
-
-  // Функция для безопасного отображения изображений
-  const getImageUrl = (src: string | undefined): string => {
-    return (
-      src || "https://placehold.co/600x400/e0e0e0/969696?text=Image+Not+Found"
-    );
-  };
-
-  return (
-    <section id={scss.Favorites}>
-      {user?.map((el) => (
-        <div className={scss.headerMobile} key={el.id}>
-          <h1 className={scss.logo}>LOGO</h1>
-          <Space direction="vertical" size={16}>
-            <Space wrap size={16}>
-              <Avatar
-                className={scss.avatar}
-                icon={
-                  el.user_picture ? (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "50%",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Image
-                        src={getImageUrl(el.user_picture)}
-                        alt="avatar"
-                        width={120}
-                        height={120}
-                        style={{ objectFit: "cover" }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                  ) : (
-                    <UserOutlined />
-                  )
-                }
-              />
-            </Space>
-          </Space>
-          <div className={scss.burgerMenu}>
-            <BurgerMenu />
-          </div>
-        </div>
-      ))}
-      <div className={scss.content}>
-        <div className={scss.headerUser}>
-          <SearchProfile />
-          <User />
-        </div>
-        <h2>Favorites</h2>
-        <div className={scss.list}>
-          {data &&
-            data.map((item, i) => (
-              <React.Fragment key={i}>
-                {item.popular_place && (
-                  <div className={scss.item}>
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "200px",
-                      }}
-                    >
-                      <Image
-                        src={getImageUrl(item.popular_place.popular_image)}
-                        alt="gallery place"
-                        fill
-                        style={{ objectFit: "cover" }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                    <div className={scss.block}>
-                      <h6>{item.popular_place.popular_name}</h6>
-                      <div>
-                        <span className={scss.grade}>
-                          {item.popular_place.avg_rating}
-                        </span>
-                        <Stars
-                          rating={item.popular_place.avg_rating}
-                          width={9}
-                          height={9}
-                        />
-                        <span className={scss.review}>
-                          {item.popular_place.rating_count}{" "}
-                          {t("Отзывы", "مراجعات", "reviews")}
-                        </span>
-                      </div>
-                      <span className={scss.metka}>
-                        <FaLocationDot className={scss.locationDot} />
-                        <span>{item.popular_place.region}</span>
-                      </span>
-                    </div>
-                    <div className={scss.heart}>
-                      <FaHeart
-                        onClick={() => handleDeleteFavorite(item.id)}
-                        className={scss.heartIconRed}
-                      />
-                    </div>
-                  </div>
-                )}
-                {item.hotels && (
-                  <div className={scss.item}>
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "200px",
-                        borderRadius: "8px 8px 0 0",
-                      }}
-                    >
-                      <Image
-                        src={getImageUrl(item.hotels.main_image)}
-                        alt="gallery place"
-                        fill
-                        style={{ objectFit: "cover" }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                    <div className={scss.block}>
-                      <h6>{item.hotels.name}</h6>
-                      <div>
-                        <span className={scss.grade}>
-                          {item.hotels.avg_rating}
-                        </span>
-                        <Stars
-                          rating={item.hotels.avg_rating}
-                          width={9}
-                          height={9}
-                        />
-                        <span className={scss.review}>
-                          {item.hotels.rating_count}{" "}
-                          {t("Отзывы", "مراجعات", "reviews")}
-                        </span>
-                      </div>
-                      <span className={scss.metka}>
-                        <FaLocationDot className={scss.locationDot} />
-                        <span>{item.hotels.region}</span>
-                      </span>
-                    </div>
-                    <div className={scss.heart}>
-                      <FaHeart
-                        onClick={() => handleDeleteFavorite(item.id)}
-                        className={scss.heartIconRed}
-                      />
-                    </div>
-                  </div>
-                )}
-                {item.kitchen && (
-                  <div className={scss.kitchen}>
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "200px",
-                      }}
-                    >
-                      <Image
-                        src={getImageUrl(item.kitchen.main_image)}
-                        alt="gallery place"
-                        fill
-                        style={{ objectFit: "cover" }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                    <div className={scss.block}>
-                      <h6>{item.kitchen.kitchen_name}</h6>
-                      <div>
-                        <span className={scss.grade}>
-                          {item.kitchen.average_rating}
-                        </span>
-                        <Stars
-                          rating={item.kitchen.average_rating}
-                          width={9}
-                          height={9}
-                        />
-                        <span className={scss.review}>
-                          {item.kitchen.rating_count}{" "}
-                          {t("Отзывы", "مراجعات", "reviews")}
-                        </span>
-                      </div>
-                      <span className={scss.metka}>
-                        <FaLocationDot className={scss.locationDot} />
-                        <span>{item.kitchen.kitchen_region}</span>
-                      </span>
-                    </div>
-                    <div className={scss.heart}>
-                      <FaHeart
-                        onClick={() => handleDeleteFavorite(item.id)}
-                        className={scss.heartIconRed}
-                      />
-                    </div>
-                  </div>
-                )}
-                {item.attractions && (
-                  <div className={scss.kitchen}>
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "200px",
-                      }}
-                    >
-                      <Image
-                        src={getImageUrl(item.attractions.main_image)}
-                        alt="gallery place"
-                        fill
-                        style={{ objectFit: "cover" }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                    <div className={scss.block}>
-                      <h6>{item.attractions.attraction_name}</h6>
-                      <div>
-                        <span className={scss.grade}>
-                          {item.attractions.avg_rating}
-                        </span>
-                        <Stars
-                          rating={item.attractions.avg_rating}
-                          width={9}
-                          height={9}
-                        />
-                        <span className={scss.review}>
-                          {item.attractions.rating_count}{" "}
-                          {t("Отзывы", "مراجعات", "reviews")}
-                        </span>
-                      </div>
-                      <span className={scss.metka}>
-                        <FaLocationDot className={scss.locationDot} />
-                        <span>{item.attractions.region_category}</span>
-                      </span>
-                    </div>
-                    <div className={scss.heart}>
-                      <FaHeart
-                        onClick={() => handleDeleteFavorite(item.id)}
-                        className={scss.heartIconRed}
-                      />
-                    </div>
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Favorites;
+    
+    .avatar {
+      justify-self: flex-end;
+      width: clamp(40px, 6vw, 120px);
+      height: clamp(40px, 6vw, 120px);
+    }
+    
+    .burgerMenu {
+      display: none;
+      @media (max-width: 768px) {
+        display: block;
+        justify-self: flex-end;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+  
+  .content {
+    width: 100%;
+    background: #fff;
+    border-radius: 0 0 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px clamp(30px, 5vw, 83px) 20px clamp(30px, 5vw, 63px);
+    overflow-y: auto; /* Добавляем скролл */
+    
+    .headerUser {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 90px;
+      
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    
+    h2 {
+      font-family: "Abril Fatface", serif;
+      font-weight: 400;
+      font-size: clamp(32px, 6vw, 64px);
+      line-height: 1.2;
+      color: #004a60;
+      margin-bottom: 20px;
+    }
+    
+    .list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px;
+      width: 100%;
+      padding-bottom: 20px;
+      
+      @media (max-width: 1180px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @media (max-width: 500px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      
+      .item, .kitchen {
+        position: relative;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 0px 10px 0px #00000026;
+        border-radius: 8px;
+        
+        img {
+          border-radius: 8px 8px 0 0;
+          width: 100%;
+          height: 271px;
+          object-fit: cover;
+          
+        }
+        
+        .block {
+          padding: 10px;
+          
+          h6 {
+            font-family: Montserrat;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 29.26px;
+            color: #242424;
+            margin: 10px 0;
+          }
+          
+          div {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            
+            .grade {
+              font-family: Inter;
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 22.4px;
+            }
+            
+            .stars {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              
+              span {
+                width: 9px;
+                height: 9px;
+                background-color: #3c5f63;
+                border-radius: 10px;
+              }
+            }
+            
+            .review {
+              font-family: Montserrat;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 16.8px;
+              color: #5a5a5a;
+              
+              @media (max-width: 600px) {
+                width: 100%;
+              }
+              
+              @media (max-width: 390px) {
+                width: auto;
+              }
+            }
+          }
+          
+          .metka {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            
+            .locationDot {
+              color: #004a60;
+            }
+            
+            span {
+              font-family: Arial;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 17.53px;
+              color: #3771c8;
+            }
+          }
+        }
+        
+        .heart {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          width: 39px;
+          height: 39px;
+          background: white;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          .heartIcon {
+            font-size: 20px;
+          }
+          
+          .heartIconRed {
+            font-size: 20px;
+            color: red;
+          }
+        }
+      }
+      
+      .kitchen {
+        height: auto;
+        
+        @media (max-width: 600px) {
+          height: auto;
+        }
+        
+        @media (max-width: 390px) {
+          height: auto;
+        }
+        
+        
+      }
+    }
+  }
+}

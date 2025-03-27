@@ -64,7 +64,7 @@ const Cafe_left: FC<Props> = ({ data }) => {
 
       <div className={scss.assess}>
         <p>
-          № {data?.rank} <span>{t(`из ${kitchens?.length} ресторанов в`, `من ${kitchens?.length} مطعم في`, `of ${kitchens?.length} Restaurants in`)}</span>
+          № {data?.rank} <span>{t(`из ${kitchens?.length} ресторанов в`, `من ${kitchens?.length} مطعم في`, `of ${kitchens?.length} Restaurants in `)} </span>
         </p>
         <p> {t("ОЦЕНКИ", "تقييمات", "ASSESSMENTS")}</p>
       </div>

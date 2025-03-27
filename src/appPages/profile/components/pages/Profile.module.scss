@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px clamp(30px, 5vw, 83px) 0 clamp(30px, 5vw, 63px);
+    padding: 20px clamp(30px, 5vw, 83px) 30px clamp(30px, 5vw, 63px);
     overflow-x: auto;
     .headerUser {
       width: 100%;

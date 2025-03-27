@@ -1,0 +1,8 @@
+.reviewsColumn {
+    flex: 1;
+    max-width: 792px;
+    
+    @media (max-width: 992px) {
+      max-width: 100%;
+    }
+  }

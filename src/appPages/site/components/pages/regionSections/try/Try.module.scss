@@ -1,110 +1,165 @@
 #Try {
   width: 100%;
+
   h2 {
-    font-family: Abril Fatface;
-    font-size: 64px;
-    font-weight: 400;
-    line-height: 86.34px;
+    font-family: "Abril Fatface";
+    font-size: clamp(24px, 5vw, 64px);
+    font-weight: 700;
+    line-height: clamp(24px, 5vw, 86.34px);
     color: #004a60;
-    margin-bottom: 50px;
-    @media (max-width: 1034px) {
-      font-size: 45px;
-      margin-bottom: 30px;
-      line-height: 60.34px;
-    }
+    margin-bottom: clamp(24px, 5vw, 50px);
+
     @media (max-width: 835px) {
-      font-size: 35px;
-      margin-bottom: 20px;
-      line-height: 56.34px;
+      font-size: clamp(20px, 4vw, 45px);
+      line-height: clamp(20px, 4vw, 60.34px);
+      margin-bottom: clamp(20px, 4vw, 30px);
     }
+
     @media (max-width: 600px) {
-      display: none;
-      font-size: 30px;
-      line-height: 45.34px;
-    }
-    @media (max-width: 390px) {
-      font-size: 24px;
-      line-height: 45.34px;
+      font-size: clamp(18px, 3vw, 30px);
+      line-height: clamp(18px, 3vw, 45.34px);
     }
   }
+
   .content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    min-height: 400px;
+
     @media (max-width: 835px) {
       display: flex;
       flex-direction: column;
       gap: 30px;
+      min-height: auto;
     }
+
     .imgs {
-      @media (max-width: 835px) {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .mainImage {
         width: 100%;
-      }
-      > img {
-        width: 100%;
-        height: 220px;
-      }
-      > div {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 5px;
-        img {
+
+        > img {
           width: 100%;
-          height: 185px;
-          object-fit: cover;
+          height: 220px;
+          transition: all 0.3s ease;
+          border-radius: 8px;
+
           @media (max-width: 835px) {
-            height: 170px;
+            height: 200px;
+          }
+
+          @media (max-width: 600px) {
+            height: 180px;
           }
         }
       }
+
+      .thumbnails {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5px;
+        margin-top: 5px;
+
+        // @media (max-width: 835px) {
+        //   display: flex;
+        //   flex-wrap: wrap;
+        //   justify-content: space-between;
+        // }
+      }
+
       .bg {
         position: relative;
         width: 100%;
         height: 85px;
         display: block;
-        div {
+
+        .overlay {
           position: absolute;
           width: 100%;
           height: 100%;
           background: #24242480;
+          z-index: 1;
         }
+
         img {
           width: 100%;
-          object-fit: cover;
           height: 100%;
+          object-fit: cover;
+          transition: all 0.3s ease;
         }
       }
     }
+
     .item {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: 310px; // Фиксируем высоту для стабильности текстов
+
       @media (max-width: 835px) {
-        width: 100%;
+        min-height: auto;
       }
+
       h4 {
-        font-family: Frank Ruhl Libre;
+        font-family: "Frank Ruhl Libre";
         font-size: 24px;
         font-weight: 700;
         line-height: 30.98px;
         color: #004a60;
         margin-bottom: 20px;
-      }
-      p {
-        font-family: Frank Ruhl Libre;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 25.82px;
-        letter-spacing: 0.05em;
-        color: #242424;
-        @media (max-width: 1034px) {
-          font-size: 18px;
-          line-height: 22px;
+        flex-shrink: 0;
+
+        @media (max-width: 600px) {
+          font-size: clamp(18px, 2vw, 22px);
         }
-        @media (max-width: 490px) {
-          font-size: 16px;
-          line-height: 20px;
+      }
+
+      .contentWrapper {
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        padding-right: 5px;
+        min-height: 260px; // Фиксируем высоту текста
+
+        @media (max-width: 835px) {
+          min-height: auto;
+        }
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #004a60;
+          border-radius: 2px;
+        }
+
+        p {
+          font-family: "Frank Ruhl Libre";
+          font-size: clamp(16px, 2vw, 20px);
+          font-weight: 400;
+          line-height: 25.82px;
+          letter-spacing: 0.05em;
+          color: #242424;
+          margin: 0;
+
+          @media (max-width: 835px) {
+            font-size: clamp(14px, 1.8vw, 18px);
+          }
+
+          @media (max-width: 600px) {
+            font-size: clamp(14px, 1.5vw, 16px);
+            line-height: 22px;
+          }
         }
       }
     }
   }
+
   .tabs {
     margin-top: 30px;
     width: 100%;
@@ -112,11 +167,22 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+
+    @media (max-width: 600px) {
+      margin-top: 20px;
+      gap: 8px;
+    }
+
     .index {
       display: flex;
       align-items: center;
       gap: 10px;
+
+      @media (max-width: 600px) {
+        gap: 8px;
+      }
     }
+
     button {
       width: 38px;
       height: 38px;
@@ -127,21 +193,101 @@
       background: none;
       color: black;
       border: 0;
-      font-family: Inter;
+      font-family: "Inter";
       font-size: 20px;
       font-weight: 400;
       line-height: 24.2px;
       cursor: pointer;
-      @media (max-width: 490px) {
-        width: 35px;
-        height: 35px;
+
+      @media (max-width: 600px) {
+        width: 34px;
+        height: 34px;
         font-size: 18px;
       }
-      &:hover {
+
+      &:hover:not(:disabled) {
         background-color: #004a60;
         color: white;
         border-radius: 30px;
       }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    height: 220px;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+
+    @media (max-width: 835px) {
+      height: 200px;
+    }
+
+    @media (max-width: 600px) {
+      height: 180px;
+    }
+  }
+
+  .imagePlaceholderSmall {
+    width: 100%;
+    height: 85px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .loadingContainer,
+  .errorContainer,
+  .emptyContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: 2rem 0;
+    color: #666;
+    width: 100%;
+    min-height: 300px;
+    transition: all 0.3s ease;
+
+    p {
+      margin-top: 1rem;
+      font-size: 1rem;
+
+      @media (max-width: 600px) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .loadingSpinner {
+    animation: spin 1.5s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }
