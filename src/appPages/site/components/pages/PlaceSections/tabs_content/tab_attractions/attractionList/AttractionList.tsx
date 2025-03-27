@@ -40,6 +40,9 @@ const AttractionList: FC<AttractionsProps> = ({
     );
   };
 
+  console.log("🚀 ~ attractionsInPlace:", attractionsInPlace);
+  console.log(paginateArray);
+
   // Рендерим элементы списка
   const renderAttractionItem = attractionsInPlace.map((el, i) => (
     <div
@@ -87,6 +90,8 @@ const AttractionList: FC<AttractionsProps> = ({
 
   const dividedArray = paginateArray(renderAttractionItem, ITEMS_PER_PAGE);
   const isAllItemsShown = isLimit >= dividedArray.length;
+  console.log("🚀 ~ dividedArray:", dividedArray);
+  console.log("🚀 ~ isAllItemsShown:", isAllItemsShown);
 
   return (
     <div className={scss.attractions}>
@@ -104,23 +109,27 @@ const AttractionList: FC<AttractionsProps> = ({
           </p>
         )}
       </div>
-      {dividedArray.slice(0, isLimit).map((item, index) => (
-        <div
-          key={index}
-          style={
-            dividedArray.slice(0, isLimit).length < 4
-              ? {
-                  gridTemplateColumns: `repeat(${
-                    dividedArray.slice(0, isLimit).length
-                  }, 280px)`,
-                }
-              : {}
-          }
-          className={scss.list}
-        >
-          {item}
-        </div>
-      ))}
+      {dividedArray.slice(0, isLimit).map((item, index) => {
+        const itemsInRow = item.length; // Количество элементов в текущем ряду
+        const isLastRow = index === dividedArray.length - 1; // Проверяем, если это последний ряд
+
+        // Стиль для грид-колонок в зависимости от количества элементов в последнем ряду
+        const gridStyle: React.CSSProperties = {
+          display: "grid",
+          marginTop: "30px",
+          gap: "30px",
+          // Если это последний ряд, показываем столько колонок, сколько элементов
+          gridTemplateColumns: isLastRow
+            ? `repeat(${itemsInRow}, 280px)` // Количество колонок в последнем ряду
+            : "repeat(4, 280px)", // В остальных рядах всегда 4 колонки
+        };
+
+        return (
+          <div key={index} style={gridStyle} className={scss.list}>
+            {item}
+          </div>
+        );
+      })}
     </div>
   );
 };

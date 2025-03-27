@@ -57,8 +57,10 @@ const Hotel_info: FC<propsType> = ({ isCurrent }) => {
               <p>{data?.address}</p>
             </div>
             <div className={scss.links}>
-            {data?.id !== undefined && <LikeHotel postId={data?.id} hotel={true} />}{" "}
-            <LuShare2 onClick={handleShare} className={scss.iconShare} />
+              {data?.id !== undefined && (
+                <LikeHotel postId={data?.id} hotel={true} />
+              )}{" "}
+              <LuShare2 onClick={handleShare} className={scss.iconShare} />
             </div>
           </div>
           <div className={scss.list}>
@@ -183,7 +185,13 @@ const Hotel_info: FC<propsType> = ({ isCurrent }) => {
                 {data?.price_long_period}
               </li>
             </ul>
-            <Link className={scss.call} style={{width: "100%", height: '60px'}} href={"tel:+996701893489"}> {t("Позвонить сейчас", "اتصل الآن", "Call Now")}</Link>
+            <Link
+              className={scss.call}
+              style={{ width: "100%", height: "60px" }}
+              href={`tel:${data?.contact ?? ""}`}
+            >
+              {t("Позвонить сейчас", "اتصل الآن", "Call Now")}
+            </Link>
           </div>
         </div>
       </div>

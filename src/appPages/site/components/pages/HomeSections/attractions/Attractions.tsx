@@ -57,6 +57,7 @@ const Attractions = () => {
                 <Link
                   onClick={() => {
                     sessionStorage.setItem("tab", "4");
+                    sessionStorage.setItem("currentAttractionId", place?.id.toString());
                   }}
                   href={`/${place.region_category}/${place.popular_places}`}
                 >

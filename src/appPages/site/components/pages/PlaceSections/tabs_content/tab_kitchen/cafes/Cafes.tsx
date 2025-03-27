@@ -97,11 +97,27 @@ const Cafes: FC<CafeProps> = ({ setIsCurrent, isCurrent }) => {
           <p onClick={() => setIsLimit(dividedArray.length)}>{t("Показать все", "عرض الكل", "Show all")}</p>
         )}
       </div>
-      {visibleCafes.map((item, index) => (
-        <div key={index} className={scss.list} style={visibleCafes.length < 4 ? { gridTemplateColumns: `repeat(${visibleCafes.length}, 280px)` } : {}}>
-          {item}
-        </div>
-      ))}
+      {visibleCafes.map((item, index) => {
+        const itemsToShow = visibleCafes[0].length; // Get the number of items
+        const isLastRow = index === dividedArray.length - 1; // Check if this is the last row
+
+        // Grid style based on the number of items in the last row
+        const gridStyle: React.CSSProperties = {
+          display: "grid",
+          marginTop: "30px",
+          gap: "30px",
+          // If it's the last row, show as many columns as items
+          gridTemplateColumns: isLastRow
+            ? `repeat(${itemsToShow < 4 ? itemsToShow : 4}, 280px)` // Number of columns in the last row
+            : "repeat(4, 280px)", // Default 4 columns for other rows
+        };
+
+        return (
+          <div key={index} style={gridStyle} className={scss.list}>
+            {item}
+          </div>
+        );
+      })}
     </div>
   );
 };
