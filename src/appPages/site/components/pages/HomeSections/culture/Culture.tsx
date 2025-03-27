@@ -49,7 +49,13 @@ const Culture: React.FC = () => {
         <div className="container">
           <div className={styles.errorContainer}>
             <ImageOff size={48} />
-            <p>{t("Ошибка загрузки данных", "خطأ في تحميل البيانات", "Error loading data")}</p>
+            <p>
+              {t(
+                "Ошибка загрузки данных",
+                "خطأ في تحميل البيانات",
+                "Error loading data"
+              )}
+            </p>
           </div>
         </div>
       </div>
@@ -63,7 +69,13 @@ const Culture: React.FC = () => {
         <div className="container">
           <div className={styles.emptyContainer}>
             <History size={48} />
-            <p>{t("Нет данных о культуре", "لا توجد بيانات ثقافية", "No culture data available")}</p>
+            <p>
+              {t(
+                "Нет данных о культуре",
+                "لا توجد بيانات ثقافية",
+                "No culture data available"
+              )}
+            </p>
           </div>
         </div>
       </div>
@@ -82,7 +94,7 @@ const Culture: React.FC = () => {
               aria-live="polite"
               aria-label={`Slide ${currentIndex + 1} of ${slides.length}`}
             >
-              {(currentSlide.culture_image && !imgError) ? (
+              {currentSlide.culture_image && !imgError ? (
                 <Image
                   className={styles.image}
                   src={currentSlide.culture_image}
@@ -94,7 +106,13 @@ const Culture: React.FC = () => {
               ) : (
                 <div className={styles.imagePlaceholder}>
                   <ImageOff size={64} />
-                  <p>{t("Изображение недоступно", "الصورة غير متوفرة", "Image not available")}</p>
+                  <p>
+                    {t(
+                      "Изображение недоступно",
+                      "الصورة غير متوفرة",
+                      "Image not available"
+                    )}
+                  </p>
                 </div>
               )}
             </div>
@@ -102,17 +120,26 @@ const Culture: React.FC = () => {
             <div className={styles.content}>
               <h2>{currentSlide.culture_name}</h2>
               <p>
-                {currentSlide.culture_description || 
-                  t("Описание отсутствует", "الوصف غير متوفر", "No description available")}
+                {currentSlide.culture_description ||
+                  t(
+                    "Описание отсутствует",
+                    "الوصف غير متوفر",
+                    "No description available"
+                  )}
               </p>
 
-              <Link href={`/culture/${currentSlide.culture.replaceAll(" ", "_").toLowerCase()}`} className={styles.butt}>
+              <Link
+                href={`/culture/${currentSlide.culture
+                  .replaceAll(" ", "_")
+                  .toLowerCase()}`}
+                className={styles.butt}
+              >
                 {t("Подробнее", "المزيد", "More")}{" "}
                 <ArrowRightIcon className={styles.icon} size={16} />
               </Link>
             </div>
           </div>
-          
+
           {slides.length > 1 && (
             <div className={styles.arrowBlock}>
               <div className={styles.arrowbtn}>
@@ -125,7 +152,9 @@ const Culture: React.FC = () => {
                 </button>
                 {slides.map((el, index) => (
                   <span
-                    style={currentIndex === index ? {background: "#3c5f63"} : {}}
+                    style={
+                      currentIndex === index ? { background: "#3c5f63" } : {}
+                    }
                     key={el.id}
                     className={currentIndex === index ? styles.active : ""}
                     onClick={() => {
