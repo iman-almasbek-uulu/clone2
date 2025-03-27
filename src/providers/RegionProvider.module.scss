@@ -4,6 +4,9 @@
   justify-content: center;
   height: 100vh;
   background-color: #f3f3f3;
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 }
 
 .horse {
@@ -15,6 +18,9 @@
   width: 120px;
   height: auto;
   animation: run 1s infinite linear;
+  @media (max-width: 400px) {
+    width: 100px;
+  }
 }
 
 .horse img:nth-child(2) {

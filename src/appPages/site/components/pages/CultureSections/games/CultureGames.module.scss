@@ -147,13 +147,15 @@ $font-display: "Abril Fatface", cursive;
     }
   }
 }
-
 .loading__container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   background-color: #f3f3f3;
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 }
 
 .horse {
@@ -165,6 +167,9 @@ $font-display: "Abril Fatface", cursive;
   width: 120px;
   height: auto;
   animation: run 1s infinite linear;
+  @media (max-width: 400px) {
+    width: 100px;
+  }
 }
 
 .horse img:nth-child(2) {

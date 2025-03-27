@@ -125,6 +125,9 @@
   justify-content: center;
   height: 100vh;
   background-color: #f3f3f3;
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 }
 
 .horse {
@@ -136,6 +139,9 @@
   width: 120px;
   height: auto;
   animation: run 1s infinite linear;
+  @media (max-width: 400px) {
+    width: 100px;
+  }
 }
 
 .horse img:nth-child(2) {
@@ -159,7 +165,7 @@
     opacity: 0.5;
   }
 }
-@media (max-width: 850px) {
+@media (max-width: 860px) {
   .section {
     .top {
       gap: 40px;
@@ -171,7 +177,7 @@
     }
   }
 }
-@media (max-width: 662px) {
+@media (max-width: 680px) {
   .section {
     .top {
       .top-paragraph {
@@ -190,7 +196,7 @@
     }
   }
 }
-@media (max-width: 543px) {
+@media (max-width: 564px) {
   .section {
     .top {
       gap: 20px;
@@ -204,7 +210,7 @@
     }
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 508px) {
   .section {
     .top {
       .top-paragraph {
