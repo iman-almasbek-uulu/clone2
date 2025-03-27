@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styles from "../culture/Culture.module.scss";
 import Image from "next/image";
 import { useGetCultureListQuery } from "@/redux/api/home";
@@ -10,20 +10,12 @@ import Link from "next/link";
 const Culture: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [imgError, setImgError] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslate();
   const { data: slides = [], isError, isLoading } = useGetCultureListQuery();
-
-  useEffect(() => {
-    if (contentRef.current) {
-      contentRef.current.scrollTop = 0;
-    }
-  }, [currentIndex]);
-
   const handleNext = () => {
     if (slides.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-      setImgError(false);
+      setImgError(false); // Reset image error when changing slides
     }
   };
 
@@ -32,10 +24,11 @@ const Culture: React.FC = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? slides.length - 1 : prevIndex - 1
       );
-      setImgError(false);
+      setImgError(false); // Reset image error when changing slides
     }
   };
 
+  // Loading state
   if (isLoading) {
     return (
       <div id={styles.Sliders}>
@@ -49,6 +42,7 @@ const Culture: React.FC = () => {
     );
   }
 
+  // Error state
   if (isError) {
     return (
       <div id={styles.Sliders}>
@@ -68,6 +62,7 @@ const Culture: React.FC = () => {
     );
   }
 
+  // Empty data state
   if (!slides || slides.length === 0) {
     return (
       <div id={styles.Sliders}>
@@ -98,7 +93,6 @@ const Culture: React.FC = () => {
               className={styles.slide}
               aria-live="polite"
               aria-label={`Slide ${currentIndex + 1} of ${slides.length}`}
-              style={{ transition: "all 0.3s ease" }}
             >
               {currentSlide.culture_image && !imgError ? (
                 <Image
@@ -108,7 +102,6 @@ const Culture: React.FC = () => {
                   width={805}
                   height={546}
                   onError={() => setImgError(true)}
-                  style={{ transition: "all 0.3s ease" }}
                 />
               ) : (
                 <div className={styles.imagePlaceholder}>
@@ -125,17 +118,15 @@ const Culture: React.FC = () => {
             </div>
 
             <div className={styles.content}>
-              <div className="content-wrapper" ref={contentRef}>
-                <h2>{currentSlide.culture_name}</h2>
-                <p>
-                  {currentSlide.culture_description ||
-                    t(
-                      "Описание отсутствует",
-                      "الوصف غير متوفر",
-                      "No description available"
-                    )}
-                </p>
-              </div>
+              <h2>{currentSlide.culture_name}</h2>
+              <p>
+                {currentSlide.culture_description ||
+                  t(
+                    "Описание отсутствует",
+                    "الوصف غير متوفر",
+                    "No description available"
+                  )}
+              </p>
 
               <Link
                 href={`/culture/${currentSlide.culture
@@ -143,7 +134,7 @@ const Culture: React.FC = () => {
                   .toLowerCase()}`}
                 className={styles.butt}
               >
-                {t("Подробнее", "المزيد", "More")}
+                {t("Подробнее", "المزيد", "More")}{" "}
                 <ArrowRightIcon className={styles.icon} size={16} />
               </Link>
             </div>
@@ -156,7 +147,6 @@ const Culture: React.FC = () => {
                   className={styles.prev}
                   onClick={handlePrev}
                   aria-label="Previous slide"
-                  style={{ transition: "all 0.3s ease" }}
                 >
                   ❮
                 </button>
@@ -169,7 +159,7 @@ const Culture: React.FC = () => {
                     className={currentIndex === index ? styles.active : ""}
                     onClick={() => {
                       setCurrentIndex(index);
-                      setImgError(false);
+                      setImgError(false); // Reset image error when changing slides
                     }}
                     aria-label={`Go to slide ${index + 1}`}
                   >
@@ -180,7 +170,6 @@ const Culture: React.FC = () => {
                   className={styles.next}
                   onClick={handleNext}
                   aria-label="Next slide"
-                  style={{ transition: "all 0.3s ease" }}
                 >
                   ❯
                 </button>

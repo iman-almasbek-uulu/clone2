@@ -10,11 +10,9 @@
     padding-top: clamp(50px, 5vw, 150px);
     @media (max-width: 835px) {
       min-height: 60vh;
-
     }
     @media (max-width: 535px) {
       min-height: 50vh;
-
     }
     @media (max-width: 420px) {
       min-height: 40vh;
@@ -140,13 +138,16 @@
               width: 35.194393157958984px;
               height: 13.291415214538574px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 32px;
               height: 13px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 29px;
-              height: 13px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 20px;
             }
           }
 
@@ -203,13 +204,16 @@
               width: 62.47871398925781px;
               height: 29.226762771606445px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 49px;
               height: 24px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 40px;
-              height: 24px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 30px;
             }
           }
 
@@ -266,13 +270,16 @@
               width: 63.49081039428711px;
               height: 35.55272102355957px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 52px;
               height: 30px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 49px;
-              height: 30px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 40px;
             }
           }
 
@@ -328,13 +335,16 @@
               width: 64.35673522949219px;
               height: 29.007099151611328px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 52px;
               height: 24px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 49px;
-              height: 24px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 40px;
             }
           }
 
@@ -391,13 +401,16 @@
               width: 56.73099899291992px;
               height: 36.65192413330078px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 52px;
               height: 36px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 49px;
-              height: 35px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 40px;
             }
           }
 
@@ -453,13 +466,16 @@
               width: 42.678829193115234px;
               height: 32.72455596923828px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 39px;
               height: 32px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 30px;
-              height: 32px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 35px;
             }
           }
 
@@ -511,13 +527,16 @@
               width: 45.2870979309082px;
               height: 20.891952514648438px;
             }
-            @media (max-width: 391px) {
+            @media (max-width: 420px) {
               width: 40px;
               height: 17px;
             }
-            @media (max-width: 320px) {
+            @media (max-width: 350px) {
               width: 37px;
-              height: 17px;
+              height: auto;
+            }
+            @media (max-width: 317px) {
+              width: 30px;
             }
           }
         }
@@ -617,9 +636,7 @@
   }
 
   .map {
-    margin-top: clamp(100px,3vw,300px);
-    
-
+    margin-top: clamp(100px, 3vw, 300px);
   }
 }
 
@@ -633,5 +650,4 @@
 
 .container {
   z-index: 3;
-
 }
