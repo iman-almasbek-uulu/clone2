@@ -473,13 +473,13 @@ const SignUpPage: FC = () => {
                 "Password must contain at least one special character (!@#$%^&*._)"
               ),
             });
-          } else if (errorData.data?.detail?.includes("8 символов")) {
+          } else if (errorData.data?.detail?.includes("Пароль должен быть не меньше 8 символов.")) {
             setError("password", {
               type: "manual",
               message: t(
-                "Пароль должен быть не меньше 8 символов",
+                "Пароль должен быть не меньше 8 символов.",
                 "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
-                "Password must be at least 8 characters"
+                "Password must be at least 8 characters."
               ),
             });
           }
