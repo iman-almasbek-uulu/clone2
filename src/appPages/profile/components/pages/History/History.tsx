@@ -17,15 +17,17 @@ import AttractioHistory from "./historyTabs/attractionHistory/AttractionHistory"
 import { Avatar, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import BurgerMenu from "@/appPages/site/ui/BurgerMenu/BurgerMenu";
+import useTranslate from "@/appPages/site/hooks/translate/translate";
 
 const History: FC = () => {
   const [userPreview] = useState<string | null>(null);
   const { data: user } = useGetMeQuery();
+  const {t} = useTranslate()
   const tabsButton = [
-    { id: 0, name: "place", img: <MdPlace size={18} /> },
-    { id: 1, name: "Hotel", img: <MdHotel size={18} /> },
-    { id: 2, name: "Kitchen", img: <IconToolsKitchen size={18} /> },
-    { id: 4, name: "Attractions", img: <MdAttractions size={18} /> },
+    { id: 0, name: t("Места", "أماكن", "Place"), img: <MdPlace size={18} /> },
+    { id: 1, name: t("Отель", "فندق", "Hotel"), img: <MdHotel size={18} /> },
+    { id: 2, name:  t("Кухня", "مطبخ", "Kitchen"), img: <IconToolsKitchen size={18} /> },
+    { id: 4, name: t("Достопримечательности", "مناطق الجذب", "Attractions"), img: <MdAttractions size={18} /> },
   ];
 
   const [isTab, setIsTab] = useState<number>(() => {
