@@ -1,5 +1,5 @@
 // Tab_kitchen.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import scss from "./Tab_kitchen.module.scss";
 import Cafes from "./cafes/Cafes";
 import Cafe_item from "./cafe_item/Cafe_item";
@@ -11,7 +11,17 @@ interface TabKitchenProps {
 }
 
 const Tab_kitchen: React.FC<TabKitchenProps> = ({ isTab }) => {
-  const [currentId, setCurrentId] = useState<number | null>(null);
+  const [currentId, setCurrentId] = useState<number | null>(() => {
+    const kitchen_id = sessionStorage.getItem("currentKitchenId")
+    return kitchen_id !== null ? +kitchen_id : null
+  });
+
+  useEffect(() => {
+    if (currentId !== null) {
+      sessionStorage.setItem("currentKitchenId", currentId?.toString())
+    }
+  }, [currentId])
+
   const { data } = useGetStaticReviewsQuery({ entityType: "kitchen" });
   const kitchenStaticInfo = data?.find((kitchen) => kitchen.id === currentId);
 
