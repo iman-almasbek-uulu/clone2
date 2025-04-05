@@ -1,7 +1,7 @@
 import { FC } from "react";
 import scss from "../Cafe_item.module.scss";
 import MapWithMarker from "./MapWithMarker";
-import { Laptop2, Link, Mail, MapPin, PhoneIcon } from "lucide-react";
+import { Laptop2, Mail, MapPin, PhoneIcon } from "lucide-react";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
 import { PLACE } from "@/redux/api/place/types";
 
@@ -105,12 +105,12 @@ const Cafe_right: FC<Cafe_rightProps> = ({ cafeLocation }) => {
         
         {/* Отображаем телефон только если он есть */}
         {hasPhone && (
-          <Link href={`tel:${locationData.phone_number}`}>
+          <a href={`tel:${locationData.phone_number}`}>
             <span>
               <PhoneIcon />
             </span>{" "}
             {locationData.phone_number}
-          </Link>
+          </a>
         )}
       </div>
     </div>
