@@ -431,9 +431,10 @@ const SignUpPage: FC = () => {
       const response = await postRegisterMutation(dataRegistr);
 
       if ("data" in response && response.data?.access) {
+        console.log("🚀 ~ constonSubmit:SubmitHandler<IFormInput>= ~ response:", response)
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem("accessToken", JSON.stringify(response.data));
-        window.location.reload();
+        // window.location.reload();
       } else if ("error" in response) {
         const errorData = response.error as {
           status: number;
@@ -447,16 +448,16 @@ const SignUpPage: FC = () => {
           setError("email", {
             type: "manual",
             message: t(
-              "Данный email уже зарегистрирован",
+              "Данный email уже зарегистрирован.",
               "هذا البريد الإلكتروني مسجل بالفعل",
-              "This email is already registered"
+              "This email is already registered."
             ),
           });
           message.error(
             t(
-              "Данный email уже зарегистрирован",
+              "Данный email уже зарегистрирован.",
               "هذا البريد الإلكتروني مسجل بالفعل",
-              "This email is already registered"
+              "This email is already registered."
             )
           );
         } else if (errorData.status === 400) {
