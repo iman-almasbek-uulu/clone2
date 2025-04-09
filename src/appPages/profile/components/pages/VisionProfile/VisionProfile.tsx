@@ -28,7 +28,7 @@ const VisionProfile = () => {
   const { data: user } = useGetMeQuery();
   const [PatchMeRequest] = usePatchMeMutation();
   
-  const { control, handleSubmit, setValue, watch } = useForm<FormValues>();
+  const { control, setValue, watch } = useForm<FormValues>();
   const fromUserValue = watch("from_user");
 
   const [detectedLocation, setDetectedLocation] = useState<string | null>(null);
