@@ -255,7 +255,6 @@ const SignInPage: FC = () => {
         storage.setItem("accessToken", JSON.stringify(response.data));
         window.location.reload();
       } else if ("error" in response) {
-        // Обработка ошибки авторизации
         setLoginError("Логин или пароль не верный");
         message.error(
           t(

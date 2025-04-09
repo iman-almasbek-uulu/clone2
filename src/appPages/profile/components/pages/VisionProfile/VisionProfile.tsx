@@ -296,7 +296,7 @@ const VisionProfile = () => {
         fetchLocation();
       }
     }
-  }, [user, setValue]);
+  }, [user, setValue, fetchLocation]);
 
   return (
     <section className={scss.VisionProfile}>
