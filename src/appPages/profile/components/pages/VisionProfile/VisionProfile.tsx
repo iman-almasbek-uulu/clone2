@@ -253,7 +253,7 @@ const VisionProfile = () => {
       }
     } catch (error) {
       console.error("Geolocation error:", error);
-      message.error(t("Ошибка определения местоположения", "خطأ في تحديد الموقع", "Location detection error"));
+      message.error(t("Ошибка определения местоположения", "خطأ в تحديد الموقع", "Location detection error"));
       setIsManualInput(true);
       setIsLocationModalOpen(true);
     }
@@ -314,6 +314,11 @@ const VisionProfile = () => {
               onClick={handleManualLocationSave}
               disabled={!manualLocation.trim()}
               loading={isSearching}
+              style={{ 
+                backgroundColor: !manualLocation ? '' : 'var(--main-color)',
+                borderColor: !manualLocation ? '' : 'var(--main-color)',
+                color: !manualLocation ? '' : 'var(--background)'
+              }}
             >
               {t("Сохранить", "حفظ", "Save")}
             </Button>
@@ -390,7 +395,7 @@ const VisionProfile = () => {
         open={isAvatarModalOpen}
         onCancel={handleAvatarCancel}
         width={900}
-        bodyStyle={{ height: '500px' }}
+        styles={{ body: { height: '500px' } }}
         footer={[
           <Button key="cancel" onClick={handleAvatarCancel}>
             {t("Отмена", "إلغاء", "Cancel")}
@@ -400,6 +405,11 @@ const VisionProfile = () => {
             type="primary"
             onClick={handleAvatarSave}
             disabled={!imageSrc}
+            style={{ 
+              backgroundColor: !imageSrc ? '' : 'var(--main-color)',
+              borderColor: !imageSrc ? '' : 'var(--main-color)',
+              color: !imageSrc ? '' : 'var(--background)'
+            }}
           >
             {t("Сохранить", "حفظ", "Save")}
           </Button>,
@@ -453,16 +463,23 @@ const VisionProfile = () => {
         open={isCoverModalOpen}
         onCancel={handleCoverCancel}
         width={1000}
-        bodyStyle={{ height: '500px' }}
+        styles={{ body: { height: '500px' } }}
         footer={[
-          <Button key="cancel" onClick={handleCoverCancel}>
+          <Button
+           key="cancel" onClick={handleCoverCancel}>
             {t("Отмена", "إلغاء", "Cancel")}
           </Button>,
           <Button
+            className="Btn"
             key="save"
             type="primary"
             onClick={handleCoverSave}
             disabled={!imageSrc}
+            style={{ 
+              backgroundColor: !imageSrc ? '' : 'var(--main-color)',
+              borderColor: !imageSrc ? '' : 'var(--main-color)',
+              color: !imageSrc ? '' : 'var(--background)'
+            }}
           >
             {t("Сохранить", "حفظ", "Save")}
           </Button>,
