@@ -217,6 +217,11 @@ const LoginForm: FC<LoginFormProps> = ({
         size="large"
         block
         htmlType="submit"
+        style={{ 
+          backgroundColor: 'var(--main-color)',
+          borderColor: 'var(--main-color)',
+          color: 'var(--background)'
+        }}
       >
         {t("Войти", "تسجيل الدخول", "Sign in")}
       </Button>

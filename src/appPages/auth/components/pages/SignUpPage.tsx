@@ -382,6 +382,11 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
           size="large"
           block
           htmlType="submit"
+          style={{ 
+            backgroundColor: 'var(--main-color)',
+            borderColor: 'var(--main-color)',
+            color: 'var(--background)'
+          }}
         >
           {t("Зарегистрироваться", "تسجيل", "Sign up")}
         </Button>
