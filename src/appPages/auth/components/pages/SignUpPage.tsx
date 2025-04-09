@@ -416,7 +416,7 @@ const SignUpPage: FC = () => {
 
   const onSubmit: SubmitHandler<IFormInput> = async (userData) => {
     const fullPhoneNumber = `${countryCode}${userData.phone_number}`;
-
+  
     const dataRegistr = {
       email: userData.email,
       password: userData.password,
@@ -426,25 +426,19 @@ const SignUpPage: FC = () => {
       phone_number: fullPhoneNumber,
       birth_date: userData.birth_date,
     };
-
+  
     try {
-      const response = await postRegisterMutation(dataRegistr);
-
-      if ("data" in response && response.data?.access) {
-        console.log("🚀 ~ constonSubmit:SubmitHandler<IFormInput>= ~ response:", response)
+      const response = await postRegisterMutation(dataRegistr).unwrap();
+      
+      if (response?.access) {
         const storage = rememberMe ? localStorage : sessionStorage;
-        storage.setItem("accessToken", JSON.stringify(response.data));
-        // window.location.reload();
-      } else if ("error" in response) {
-        const errorData = response.error as {
-          status: number;
-          data?: { detail?: string };
-        };
-
-        if (
-          errorData.status === 400 &&
-          errorData.data?.detail === "user with this email already exists."
-        ) {
+        storage.setItem("accessToken", JSON.stringify(response));
+      }
+    } catch (error: any) {
+      console.error("Registration error:", error);
+      
+      if (error.status === 400) {
+        if (error.data?.detail === "user with this email already exists.") {
           setError("email", {
             type: "manual",
             message: t(
@@ -453,48 +447,32 @@ const SignUpPage: FC = () => {
               "This email is already registered."
             ),
           });
-          message.error(
-            t(
-              "Данный email уже зарегистрирован.",
-              "هذا البريد الإلكتروني مسجل بالفعل",
-              "This email is already registered."
-            )
-          );
-        } else if (errorData.status === 400) {
-          if (
-            errorData.data?.detail?.includes(
-              "Пароль должен содержать хотя бы один специальный символ."
-            )
-          ) {
-            setError("password", {
-              type: "manual",
-              message: t(
-                "Пароль должен содержать хотя бы один специальный символ (!@#$%^&*._)",
-                "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل (!@#$%^&*._)",
-                "Password must contain at least one special character (!@#$%^&*._)"
-              ),
-            });
-          } else if (errorData.data?.detail?.includes("Пароль должен быть не меньше 8 символов.")) {
-            setError("password", {
-              type: "manual",
-              message: t(
-                "Пароль должен быть не меньше 8 символов.",
-                "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
-                "Password must be at least 8 characters."
-              ),
-            });
-          }
-
-          if (errorData.data?.detail) {
-            message.error(errorData.data.detail);
-          }
+        } else if (error.data?.detail === "Пароль должен быть не менее 8 символов.") {
+          setError("password", {
+            type: "manual",
+            message: t(
+              "Пароль должен быть не менее 8 символов.",
+              "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+              "Password must be at least 8 characters."
+            ),
+          });
+        } else if (error.data?.detail?.includes("Пароль должен содержать хотя бы один специальный символ.")) {
+          setError("password", {
+            type: "manual",
+            message: t(
+              "Пароль должен содержать хотя бы один специальный символ (!@#$%^&*._)",
+              "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل (!@#$%^&*._)",
+              "Password must contain at least one special character (!@#$%^&*._)"
+            ),
+          });
         }
+        
+        message.error(error.data?.detail || t("Ошибка при регистрации", "خطأ في التسجيل", "Registration error"));
+      } else {
+        message.error(t("Ошибка соединения с сервером", "خطأ في الاتصال بالخادم", "Server connection error"));
       }
-    } catch (error: unknown) {
-      console.error("An error occurred:", error);
     }
   };
-
   const handleRememberMeChange = (checked: boolean) => {
     setRememberMe(checked);
   };
