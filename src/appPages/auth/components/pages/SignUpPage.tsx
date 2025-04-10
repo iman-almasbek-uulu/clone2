@@ -208,7 +208,7 @@ const SignUpPage: FC = () => {
 
   const onSubmit: SubmitHandler<IFormInput> = async (userData) => {
     const fullPhoneNumber = `${countryCode}${userData.phone_number}`;
-  
+
     const dataRegistr = {
       email: userData.email,
       password: userData.password,
@@ -218,20 +218,20 @@ const SignUpPage: FC = () => {
       phone_number: fullPhoneNumber,
       birth_date: userData.birth_date,
     };
-  
+
     try {
       const response = await postRegisterMutation(dataRegistr).unwrap();
-      
+
       if (response?.access) {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem("accessToken", JSON.stringify(response));
       }
     } catch (error: unknown) {
       console.error("Registration error:", error);
-      
+
       // Типизированная проверка ошибки
       const apiError = error as ApiError;
-      
+
       if (apiError.status === 400) {
         if (apiError.data?.detail === "user with this email already exists.") {
           setError("email", {
@@ -242,7 +242,9 @@ const SignUpPage: FC = () => {
               "This email is already registered."
             ),
           });
-        } else if (apiError.data?.detail === "Пароль должен быть не менее 8 символов.") {
+        } else if (
+          apiError.data?.detail === "Пароль должен быть не менее 8 символов."
+        ) {
           setError("password", {
             type: "manual",
             message: t(
@@ -251,7 +253,11 @@ const SignUpPage: FC = () => {
               "Password must be at least 8 characters."
             ),
           });
-        } else if (apiError.data?.detail?.includes("Пароль должен содержать хотя бы один специальный символ.")) {
+        } else if (
+          apiError.data?.detail?.includes(
+            "Пароль должен содержать хотя бы один специальный символ."
+          )
+        ) {
           setError("password", {
             type: "manual",
             message: t(
@@ -261,10 +267,19 @@ const SignUpPage: FC = () => {
             ),
           });
         }
-        
-        message.error(apiError.data?.detail || t("Ошибка при регистрации", "خطأ في التسجيل", "Registration error"));
+
+        message.error(
+          apiError.data?.detail ||
+            t("Ошибка при регистрации", "خطأ في التسجيل", "Registration error")
+        );
       } else {
-        message.error(t("Ошибка соединения с сервером", "خطأ في الاتصال بالخادم", "Server connection error"));
+        message.error(
+          t(
+            "Ошибка соединения с сервером",
+            "خطأ في الاتصال بالخادم",
+            "Server connection error"
+          )
+        );
       }
     }
   };
@@ -281,7 +296,29 @@ const SignUpPage: FC = () => {
 
   return (
     <section className={scss.RegistrationPage}>
-      {/* ... (остальной код компонента остается без изменений) ... */}
+      <h1 className={scss.authTitle}>{t("Sign up", "تسجيل", "Sign up")}</h1>
+      <h2>{t("Создать аккаунт", "إنشاء حساب", "Create account")}</h2>
+      <RegistrationForm
+        handleSubmit={handleSubmit}
+        control={control}
+        errors={errors}
+        password={password}
+        handleRememberMeChange={handleRememberMeChange}
+        onSubmit={onSubmit}
+        handleCountryCodeChange={handleCountryCodeChange}
+      />
+      <div className={scss.links}>
+        <p>
+          {t(
+            "У вас уже есть аккаунт?",
+            "هل لديك حساب بالفعل؟",
+            "Already have an account?"
+          )}
+        </p>
+        <Link href="/auth/sign-in" className={scss.link}>
+          {t("Войти", "تسجيل الدخول", "Sign in")}
+        </Link>
+      </div>
     </section>
   );
 };
