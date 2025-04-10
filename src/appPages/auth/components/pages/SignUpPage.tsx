@@ -66,10 +66,10 @@ interface ApiErrorResponse {
   };
 }
 
-interface RegistrationSuccessResponse {
-  access: string;
-  refresh?: string;
-}
+// interface RegistrationSuccessResponse {
+//   access: string;
+//   refresh?: string;
+// }
 
 const InputField: FC<InputFieldProps> = ({
   name,
@@ -445,6 +445,7 @@ const SignUpPage: FC = () => {
       if ('access' in response) {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem("accessToken", JSON.stringify(response));
+        window.location.reload();
       }
     } catch (error) {
       console.error("Registration error:", error);
