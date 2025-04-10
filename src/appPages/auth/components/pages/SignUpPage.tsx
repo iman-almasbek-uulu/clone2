@@ -46,7 +46,7 @@ interface InputFieldProps {
   errors: FieldErrors<IFormInput>;
 }
 
-interface PasswordFieldProps extends InputFieldProps {}
+type PasswordFieldProps = InputFieldProps;
 
 interface RegistrationFormProps {
   handleSubmit: UseFormHandleSubmit<IFormInput>;
@@ -62,7 +62,6 @@ interface ApiErrorResponse {
   status: number;
   data?: {
     detail?: string;
-    [key: string]: unknown;
   };
 }
 
