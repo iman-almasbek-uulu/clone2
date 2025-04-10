@@ -9,6 +9,7 @@ import { useGetHotelsQuery, useGetKitchensQuery } from "@/redux/api/place";
 import { useGetAttractionsQuery } from "@/redux/api/home";
 import { useGetPopularPlacesQuery } from "@/redux/api/regions";
 import useTranslate from "@/appPages/site/hooks/translate/translate";
+import Link from "next/link";
 interface PopularPlace {
   id: number;
   popular_name: string;
@@ -135,7 +136,7 @@ const SearchProfile: FC = () => {
                 <h3>{t("Места", "أماكن", "Places")}</h3>
                 <ul>
                   {searchResults.places.map(place => (
-                    <li key={`place-${place.id}`}>{place.popular_name}</li>
+                    <Link href={`/${place.region}/${place.id}`} onClick={() => sessionStorage.setItem("tab", "0")} key={`place-${place.id}`}>{place.popular_name}</Link>
                   ))}
                 </ul>
               </div>
@@ -146,7 +147,10 @@ const SearchProfile: FC = () => {
                 <h3>{t("Отели", "فنادق", "Hotels")}</h3>
                 <ul>
                   {searchResults.hotels.map(hotel => (
-                    <li key={`hotel-${hotel.id}`}>{hotel.name}</li>
+                    <Link href={`/${hotel.region}/${hotel.popular_places}`} onClick={() => {
+                      sessionStorage.setItem("tab", "1")
+                      sessionStorage.setItem("currentHotelId", hotel.id.toString())
+                    }} key={`hotel-${hotel.id}`}>{hotel.name}</Link>
                   ))}
                 </ul>
               </div>
@@ -157,7 +161,10 @@ const SearchProfile: FC = () => {
                 <h3>{t("Кухни", "مطابخ", "Kitchens")}</h3>
                 <ul>
                   {searchResults.kitchens.map(kitchen => (
-                    <li key={`kitchen-${kitchen.id}`}>{kitchen.kitchen_name}</li>
+                    <Link href={`/${kitchen.kitchen_region}/${kitchen.popular_places}`} onClick={() => {
+                      sessionStorage.setItem("tab", "2")
+                      sessionStorage.setItem("currentKitchenId", kitchen.id.toString())
+                    }} key={`kitchen-${kitchen.id}`}>{kitchen.kitchen_name}</Link>
                   ))}
                 </ul>
               </div>
@@ -168,7 +175,10 @@ const SearchProfile: FC = () => {
                 <h3>{t("Достопримечательности", "معالم", "Attractions")}</h3>
                 <ul>
                   {searchResults.attractions.map(attraction => (
-                    <li key={`attraction-${attraction.id}`}>{attraction.attraction_name}</li>
+                    <Link href={`/${attraction.region_category}/${attraction.popular_places}`} onClick={() => {
+                      sessionStorage.setItem("tab", "4")
+                      sessionStorage.setItem("currentAttractionId", attraction.id.toString());
+                    }} key={`attraction-${attraction.id}`}>{attraction.attraction_name}</Link>
                   ))}
                 </ul>
               </div>

@@ -105,12 +105,12 @@ const Cafe_right: FC<Cafe_rightProps> = ({ cafeLocation }) => {
         
         {/* Отображаем телефон только если он есть */}
         {hasPhone && (
-          <p>
+          <a href={`tel:${locationData.phone_number}`}>
             <span>
               <PhoneIcon />
             </span>{" "}
             {locationData.phone_number}
-          </p>
+          </a>
         )}
       </div>
     </div>

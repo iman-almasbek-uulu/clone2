@@ -1,24 +1,46 @@
 .modalOverlay {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.9); /* Более темный фон */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(8px); /* Добавляем размытие для глубины */
+  /* Добавляем префикс для Safari */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  /* Исправление для проблемы с высотой в Safari */
+  height: 100vh;
+  height: -webkit-fill-available;
+  width: 100vw;
+  overflow: hidden;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
 }
 
-.modalContent {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 50;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 1rem;
-  background-color: rgba(18, 18, 24, 0.7); /* Темный фон с прозрачностью */
+  justify-content: center;
+  /* Добавляем префикс для Safari */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  /* Исправление для проблемы с высотой в Safari */
+  height: 100vh;
+  height: -webkit-fill-available;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .closeButton {
@@ -62,17 +84,22 @@
 .mainImageContainer {
   position: relative;
   width: 90%;
-  height: 80vh;
+  /* Гибкая высота для Safari */
+  flex-grow: 1;
   max-width: 72rem;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  background-color: rgba(15, 15, 20, 0.6); /* Темный фон контейнера */
+  background-color: rgba(15, 15, 20, 0.6);
   overflow: hidden;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Добавляем тень */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  /* Исправления для Safari */
+  height: auto;
+  max-height: 80vh;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mainImage {
@@ -82,9 +109,26 @@
   max-width: 90%;
   object-fit: contain;
   transition: opacity 0.3s ease-in-out;
-  background-color: rgba(30, 30, 40, 0.5); /* Темный фон для изображения */
+  background-color: rgba(30, 30, 40, 0.5);
   border-radius: 4px;
+  /* Фикс для object-fit в Safari */
+  -webkit-transform-style: preserve-3d;
 }
+
+@supports (-webkit-touch-callout: none) {
+  .modalOverlay {
+    height: -webkit-fill-available;
+  }
+  
+  .mainImageContainer {
+    max-height: -webkit-fill-available;
+  }
+  
+  .thumbnailsContainer {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 
 .thumbnailsContainer {
   width: 90%;
@@ -219,10 +263,6 @@
   .thumbnailItem {
     width: 4.5rem;
     height: 3.5rem;
-  }
-  
-  .thumbnailsList {
-    justify-content: flex-start;
   }
   
   .navButton {

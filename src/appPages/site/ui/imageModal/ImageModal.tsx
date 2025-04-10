@@ -84,6 +84,7 @@ export function ImageModal({
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
+      
     >
       <div className={styles.modalContent}>
         <button

@@ -40,10 +40,6 @@ const AttractionList: FC<AttractionsProps> = ({
     );
   };
 
-  console.log("🚀 ~ attractionsInPlace:", attractionsInPlace);
-  console.log(paginateArray);
-
-  // Рендерим элементы списка
   const renderAttractionItem = attractionsInPlace.map((el, i) => (
     <div
       onClick={() => setIsCurrent(el.id)}
